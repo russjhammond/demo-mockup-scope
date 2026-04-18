@@ -1,0 +1,86 @@
+/* Shared styles — Cactus by Sureshot brand system */
+:root {
+  --navy: #2a2f42;
+  --navy-2: #3a4059;
+  --navy-3: #1a1d2b;
+  --red: #cc2027;
+  --red-dark: #b81b21;
+  --gold: #efc845;
+  --ink: #1a1d2b;
+  --muted: #6b7184;
+  --line: #e5e7eb;
+  --bg: #f7f8fa;
+  --card: #fff;
+  --radius: 14px;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: 'Raleway', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--ink); background: var(--bg); line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--navy); }
+code { font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 0.85em; }
+
+/* Scope label bar */
+.scope-mock {
+  background: var(--navy-3); color: #fff; padding: 10px 20px;
+  font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+  border-bottom: 2px solid var(--gold);
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;
+}
+.scope-mock b { color: var(--gold); }
+.scope-mock .crumbs { display: flex; gap: 10px; font-size: 11px; }
+.scope-mock .crumbs a { color: #cfd3e1; text-decoration: none; padding: 3px 8px; border-radius: 4px; }
+.scope-mock .crumbs a:hover { background: rgba(255,255,255,0.1); }
+.scope-mock .crumbs a.current { background: var(--red); color: #fff; }
+
+/* Shared top nav */
+.topnav {
+  background: var(--navy); color: #fff;
+  padding: 16px 32px; display: flex; align-items: center; justify-content: space-between;
+  font-size: 14px;
+}
+.topnav .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: 0.02em; font-size: 17px; text-decoration: none; color: #fff; }
+.topnav .brand .mark { width: 32px; height: 32px; background: var(--red); border-radius: 7px; display: grid; place-items: center; color: #fff; font-weight: 900; font-size: 16px; }
+.topnav .brand small { font-weight: 400; opacity: 0.7; margin-left: 4px; font-size: 13px; }
+.topnav .links { display: flex; gap: 6px; align-items: center; }
+.topnav .links a { color: #fff; text-decoration: none; opacity: 0.82; padding: 8px 14px; border-radius: 7px; font-weight: 500; transition: all 0.15s; }
+.topnav .links a:hover { opacity: 1; background: rgba(255,255,255,0.06); }
+.topnav .links a.active { opacity: 1; background: rgba(239,200,69,0.14); color: var(--gold); font-weight: 600; }
+.topnav .links a.cta-nav { background: var(--red); color: #fff; opacity: 1; font-weight: 600; margin-left: 8px; }
+.topnav .links a.cta-nav:hover { background: var(--red-dark); }
+@media (max-width: 780px) {
+  .topnav { padding: 12px 16px; flex-wrap: wrap; gap: 10px; }
+  .topnav .links { gap: 2px; flex-wrap: wrap; }
+  .topnav .links a { padding: 6px 10px; font-size: 13px; }
+}
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 10px; font-weight: 600; font-size: 15px; text-decoration: none; border: 0; cursor: pointer; font-family: inherit; transition: all 0.15s; }
+.btn-primary { background: var(--red); color: #fff; }
+.btn-primary:hover { background: var(--red-dark); }
+.btn-secondary { background: transparent; color: var(--navy); border: 1.5px solid var(--navy); }
+.btn-secondary:hover { background: var(--navy); color: #fff; }
+.btn-gold { background: var(--gold); color: var(--ink); }
+.btn-lg { padding: 16px 28px; font-size: 16px; }
+
+.eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); font-weight: 700; margin-bottom: 14px; }
+
+/* Shared footer */
+.footer {
+  background: var(--navy-3); color: #cfd3e1; padding: 40px 32px;
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px;
+  font-size: 14px;
+}
+@media (max-width: 780px) { .footer { grid-template-columns: 1fr 1fr; } }
+.footer h4 { color: #fff; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 12px; }
+.footer ul { list-style: none; padding: 0; margin: 0; }
+.footer li { margin-bottom: 8px; }
+.footer a { color: #cfd3e1; text-decoration: none; }
+.footer a:hover { color: var(--gold); }
+.footer .brand-col { display: flex; flex-direction: column; gap: 10px; }
+.footer .brand-col .brand-line { display: flex; align-items: center; gap: 10px; font-weight: 800; color: #fff; font-size: 17px; }
+.footer .manifesto { font-size: 13px; opacity: 0.75; font-style: italic; max-width: 320px; line-height: 1.6; }
+.footer .copyright { grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px; margin-top: 12px; font-size: 12px; opacity: 0.6; }

@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Agent Delivery API — Cactus by Sureshot</title>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+<style>
+  .hero {
+    background: linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
+    color: #fff; padding: 72px 32px 60px;
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 50px; align-items: center;
+    max-width: 1180px; margin: 0 auto;
+  }
+  @media (max-width: 900px) { .hero { grid-template-columns: 1fr; padding: 48px 24px 40px; } }
+  .hero .eyebrow { color: var(--gold); }
+  .hero h1 { font-size: 48px; line-height: 1.08; font-weight: 800; margin: 0 0 14px; }
+  .hero h1 em { color: var(--gold); font-style: normal; }
+  .hero .sub { font-size: 20px; opacity: 0.9; margin: 0 0 28px; font-weight: 300; }
+  .hero .pitch { background: rgba(255,255,255,0.06); border-left: 3px solid var(--gold); padding: 14px 18px; border-radius: 0 8px 8px 0; font-size: 14px; margin: 0 0 28px; line-height: 1.6; color: #e7eaf2; }
+  .hero .pitch b { color: #fff; }
+  .hero .cta-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  @media (max-width: 600px) { .hero h1 { font-size: 34px; } }
+
+  /* Phone gallery in hero */
+  .phones {
+    display: flex; gap: 18px; justify-content: center; align-items: flex-end;
+  }
+  .phone-mini {
+    flex: 1; background: #1a1d2b; border-radius: 24px; padding: 6px;
+    max-width: 150px; box-shadow: 0 12px 32px rgba(0,0,0,0.3); cursor: pointer;
+    transition: all 0.2s; text-decoration: none;
+  }
+  .phone-mini:hover { transform: translateY(-6px) scale(1.03); }
+  .phone-mini:nth-child(1) { margin-bottom: 20px; }
+  .phone-mini:nth-child(3) { margin-bottom: 40px; }
+  .phone-mini .screen { background: #f0f2f5; border-radius: 20px; overflow: hidden; }
+  .phone-mini .screen img, .phone-mini .screen .ph-hero-img { width: 100%; display: block; aspect-ratio: 9/10; object-fit: cover; background: #ddd; }
+  .phone-mini .bubble { padding: 8px; background: #fff; border-top: 1px solid #eee; }
+  .phone-mini .bubble .t { font-size: 9px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+  .phone-mini .bubble .d { font-size: 8px; color: #6b7184; line-height: 1.3; }
+  .phone-mini .label { color: var(--gold); font-size: 11px; text-align: center; margin-top: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+
+  /* Value props */
+  .vprops { padding: 64px 32px; max-width: 1180px; margin: 0 auto; }
+  .vprops-head { text-align: center; margin-bottom: 40px; }
+  .vprops-head h2 { font-size: 32px; margin: 0 0 10px; color: var(--navy); font-weight: 800; }
+  .vprops-head p { color: var(--muted); font-size: 16px; max-width: 560px; margin: 0 auto; }
+  .vprops-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  @media (max-width: 900px) { .vprops-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 500px) { .vprops-grid { grid-template-columns: 1fr; } }
+  .vprop { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; }
+  .vprop .num { color: var(--red); font-weight: 800; font-size: 13px; letter-spacing: 0.08em; margin-bottom: 10px; }
+  .vprop h3 { font-size: 18px; margin: 0 0 8px; color: var(--navy); font-weight: 700; }
+  .vprop p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
+
+  /* How it works */
+  .pipeline { background: var(--navy); color: #fff; padding: 64px 32px; }
+  .pipeline-wrap { max-width: 1180px; margin: 0 auto; }
+  .pipeline h2 { font-size: 32px; text-align: center; margin: 0 0 10px; }
+  .pipeline .sub { text-align: center; color: #cfd3e1; margin: 0 0 40px; font-size: 16px; }
+  .pipe-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  @media (max-width: 900px) { .pipe-steps { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 500px) { .pipe-steps { grid-template-columns: 1fr; } }
+  .pipe-step { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 16px; }
+  .pipe-step .n { color: var(--gold); font-weight: 800; font-size: 13px; margin-bottom: 6px; }
+  .pipe-step h4 { margin: 0 0 6px; font-size: 15px; }
+  .pipe-step p { margin: 0; font-size: 12px; color: #cfd3e1; line-height: 1.5; }
+
+  /* Try live banner */
+  .try-live { background: var(--gold); padding: 48px 32px; text-align: center; }
+  .try-live h2 { margin: 0 0 10px; color: var(--ink); font-size: 28px; }
+  .try-live p { margin: 0 0 22px; color: var(--navy); font-size: 16px; max-width: 560px; margin-left: auto; margin-right: auto; }
+  .try-live .btn { background: var(--navy); color: #fff; }
+  .try-live .btn:hover { background: var(--navy-2); }
+
+  /* Code example */
+  .code-demo { padding: 64px 32px; max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+  @media (max-width: 900px) { .code-demo { grid-template-columns: 1fr; gap: 24px; } }
+  .code-demo h2 { font-size: 28px; color: var(--navy); margin: 0 0 10px; font-weight: 800; }
+  .code-demo p { color: var(--muted); font-size: 15px; margin: 0 0 16px; line-height: 1.6; }
+  .code-demo ul { padding-left: 18px; color: var(--ink); font-size: 14px; }
+  .code-demo li { margin: 6px 0; }
+  .codebox { background: var(--navy-3); color: #e3e6ef; border-radius: 12px; padding: 22px; font-family: 'SF Mono', monospace; font-size: 13px; line-height: 1.6; white-space: pre; overflow-x: auto; }
+  .codebox .k { color: #bca0ff; }
+  .codebox .s { color: #9ce59c; }
+  .codebox .c { color: #7a8297; font-style: italic; }
+  .codebox .p { color: var(--gold); }
+
+  /* Final CTA */
+  .final-cta { background: #fff; padding: 56px 32px; text-align: center; border-top: 1px solid var(--line); }
+  .final-cta h2 { font-size: 30px; margin: 0 0 10px; color: var(--navy); }
+  .final-cta p { margin: 0 0 22px; color: var(--muted); font-size: 16px; }
+  .final-cta .row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<div class="scope-mock">
+  <span><b>SCOPE MOCK</b> — Surface 2 of 3: <b>/solutions/rcs-api</b> (updated CTAs + shared nav)</span>
+  <div class="crumbs">
+    <a href="./index.html">Landing</a>
+    <a href="./rcs-api.html" class="current">Solutions · RCS API</a>
+    <a href="./demo.html">Demo Site</a>
+  </div>
+</div>
+
+<nav class="topnav">
+  <a href="./index.html" class="brand"><span class="mark">S</span> Cactus <small>by Sureshot</small></a>
+  <div class="links">
+    <a href="./index.html">Platform</a>
+    <a href="./rcs-api.html" class="active">Agent API</a>
+    <a href="./demo.html">Demo</a>
+    <a href="#">Docs</a>
+    <a href="#" class="cta-nav">Talk to Us</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div>
+    <div class="eyebrow">Agent Delivery API</div>
+    <h1>The last mile — from your agent to <em>their messages</em></h1>
+    <div class="sub">Your agent has brains. We deliver the engagement.</div>
+    <div class="pitch">
+      <b>One API call. Any format.</b> Give us a phone number and what your agent wants to say — we pick the right format (text, card, carousel), handle delivery, fall back gracefully, and forward replies. No RCS protocol expertise required.
+    </div>
+    <div class="cta-row">
+      <a class="btn btn-primary btn-lg" href="./demo.html">▶ Send yourself a live RCS message</a>
+      <a class="btn btn-secondary btn-lg" style="color:#fff;border-color:#fff" href="#">Talk to Us</a>
+    </div>
+  </div>
+  <div class="phones">
+    <a class="phone-mini" href="./demo.html">
+      <div class="screen">
+        <img src="https://sureshot-assets.nyc3.cdn.digitaloceanspaces.com/rcs/events/booking-venue-v3.jpg" alt="">
+        <div class="bubble"><div class="t">Booking Confirmed!</div><div class="d">The Grand Hotel · Mar 14 · 3pm</div></div>
+      </div>
+      <div class="label">Rich Card</div>
+    </a>
+    <a class="phone-mini" href="./demo.html">
+      <div class="screen">
+        <img src="https://sureshot-assets.nyc3.cdn.digitaloceanspaces.com/rcs/events/stage-production-v3.jpg" alt="">
+        <div class="bubble"><div class="t">Stage &amp; Production</div><div class="d">Full stage design, LED walls...</div></div>
+      </div>
+      <div class="label">Carousel</div>
+    </a>
+    <a class="phone-mini" href="./demo.html">
+      <div class="screen">
+        <img src="https://sureshot-assets.nyc3.cdn.digitaloceanspaces.com/rcs/ecommerce/delivery-v3.jpg" alt="">
+        <div class="bubble"><div class="t">Out for Delivery</div><div class="d">ETA today by 3pm · Track live</div></div>
+      </div>
+      <div class="label">Actions</div>
+    </a>
+  </div>
+</section>
+
+<!-- Value props -->
+<section class="vprops">
+  <div class="vprops-head">
+    <h2>Why build on Cactus</h2>
+    <p>Twilio sends SMS. HubSpot builds templates. Cactus is the complete rendering and delivery layer for agents.</p>
+  </div>
+  <div class="vprops-grid">
+    <div class="vprop">
+      <div class="num">01</div>
+      <h3>Simplicity</h3>
+      <p>One endpoint, any format. No protocol expertise, no template builders, no agency contracts.</p>
+    </div>
+    <div class="vprop">
+      <div class="num">02</div>
+      <h3>Automatic Formatting</h3>
+      <p>We pick cards, carousels, or text based on what your agent said. You write plain language; we make it rich.</p>
+    </div>
+    <div class="vprop">
+      <div class="num">03</div>
+      <h3>Intelligent Processing</h3>
+      <p>Seven-step pipeline: detection, validation, optimization, compliance, delivery, fallback, and monitoring.</p>
+    </div>
+    <div class="vprop">
+      <div class="num">04</div>
+      <h3>Real-Time Delivery</h3>
+      <p>Branded RCS on Android, clean SMS fallback everywhere else. Delivery status streams back to you.</p>
+    </div>
+  </div>
+</section>
+
+<!-- How it works pipeline -->
+<section class="pipeline">
+  <div class="pipeline-wrap">
+    <h2>How it works</h2>
+    <p class="sub">From <code style="color:var(--gold)">POST /v1/messages</code> to delivered, in seconds.</p>
+    <div class="pipe-steps">
+      <div class="pipe-step"><div class="n">STEP 1</div><h4>Detect</h4><p>We scan your message for products, events, dates, URLs, and other structure.</p></div>
+      <div class="pipe-step"><div class="n">STEP 2</div><h4>Validate</h4><p>Phone numbers normalized. Image URLs health-checked. Broken content stripped.</p></div>
+      <div class="pipe-step"><div class="n">STEP 3</div><h4>Optimize</h4><p>Best format selected — text, rich card, carousel — based on what will actually render.</p></div>
+      <div class="pipe-step"><div class="n">STEP 4</div><h4>Comply</h4><p>TCPA scanning, STOP/START keyword handling, consent checks — before it leaves.</p></div>
+      <div class="pipe-step"><div class="n">STEP 5</div><h4>Deliver</h4><p>Carrier-direct RCS delivery. We handle the agent registration, the trusted sender badge, everything.</p></div>
+      <div class="pipe-step"><div class="n">STEP 6</div><h4>Fall Back</h4><p>Non-RCS devices get clean SMS with inline tappable URLs — no empty cards, no broken experiences.</p></div>
+      <div class="pipe-step"><div class="n">STEP 7</div><h4>Forward Replies</h4><p>Inbound taps and text replies hit your webhook or MCP server in real time.</p></div>
+      <div class="pipe-step" style="background:var(--gold);color:var(--ink);border-color:var(--gold)"><div class="n" style="color:var(--red)">LIVE</div><h4 style="color:var(--ink)">See it now</h4><p style="color:var(--navy)"><a href="./demo.html" style="color:var(--red);font-weight:700;text-decoration:none">Run the full pipeline on your phone →</a></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Code + try live -->
+<section class="code-demo">
+  <div>
+    <div class="eyebrow">Be lazy or be precise</div>
+    <h2>Two paths. Same API.</h2>
+    <p>Send plain text and let our AI extract structure — or pass explicit items and control every detail. Same endpoint, same response shape, same delivery guarantees.</p>
+    <ul>
+      <li><b>Raw text path</b> — perfect for AI agents, chatbots, and LLM-driven flows</li>
+      <li><b>Structured path</b> — perfect for systems that already have product data or event records</li>
+      <li><b>MCP server</b> — drop-in for Claude Code, Cursor, and other agent tooling</li>
+    </ul>
+    <div style="margin-top: 20px">
+      <a class="btn btn-primary" href="./demo.html">Try both paths live →</a>
+    </div>
+  </div>
+  <div class="codebox"><span class="c"># Raw text — AI extracts structure</span>
+curl -X POST <span class="p">gateway.sureshot.io/v1/messages</span> \
+  -H <span class="s">"Authorization: Bearer sk_..."</span> \
+  -d '{
+    <span class="k">"to"</span>: <span class="s">"+17045550142"</span>,
+    <span class="k">"message"</span>: <span class="s">"Booking confirmed at The
+      Grand Hotel. Check-in Mar 14
+      at 3pm. #GH-20260314."</span>
+  }'
+
+<span class="c"># → delivers as a rich card
+# → with tap-to-call, reservation
+#   link, and modify reply.</span></div>
+</section>
+
+<!-- Try live banner -->
+<section class="try-live">
+  <h2>Stop reading. Start seeing.</h2>
+  <p>The fastest way to understand the Agent Delivery API is to watch one land on your phone.</p>
+  <a class="btn btn-lg" href="./demo.html">▶ Send yourself a demo message</a>
+</section>
+
+<!-- Final CTA -->
+<section class="final-cta">
+  <h2>Ready to wire it up?</h2>
+  <p>Pick the door that fits — try it yourself, read the docs, or talk to Russ.</p>
+  <div class="row">
+    <a class="btn btn-primary" href="./demo.html">▶ Send yourself a demo</a>
+    <a class="btn btn-secondary" href="#">Read the API docs</a>
+    <a class="btn btn-secondary" href="#">Talk to Us</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="brand-col">
+    <div class="brand-line"><span style="width:32px;height:32px;background:var(--red);border-radius:7px;display:grid;place-items:center;font-weight:900;font-size:16px;">S</span> Cactus <small style="opacity:0.7;font-weight:400;">by Sureshot</small></div>
+    <p class="manifesto">Clean data in. Personalized messages out. The last mile — from your agent to their messages.</p>
+  </div>
+  <div><h4>Platform</h4><ul><li><a href="./index.html">Overview</a></li><li><a href="./rcs-api.html">Agent API</a></li><li><a href="./demo.html">Live Demo</a></li><li><a href="#">Console</a></li></ul></div>
+  <div><h4>Developers</h4><ul><li><a href="#">API Docs</a></li><li><a href="#">MCP Server</a></li><li><a href="#">Changelog</a></li><li><a href="#">Status</a></li></ul></div>
+  <div><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul></div>
+  <div class="copyright">© Sure Shot Labs · Delaware LLC</div>
+</footer>
+
+</body>
+</html>
