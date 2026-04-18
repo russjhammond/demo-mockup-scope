@@ -66,6 +66,7 @@
   <div class="crumbs">
     <a href="./index.html" class="current">Landing</a>
     <a href="./rcs-api.html">Solutions · RCS API</a>
+    <a href="./apps.html">Apps</a>
     <a href="./demo.html">Demo Site</a>
   </div>
 </div>
@@ -78,6 +79,7 @@
   <div class="links">
     <a href="./index.html" class="active">Platform</a>
     <a href="./rcs-api.html">Agent API</a>
+    <a href="./apps.html">Apps</a>
     <a href="./demo.html">Demo</a>
     <a href="#">Docs</a>
     <a href="#" class="cta-nav">Talk to Us</a>
@@ -123,9 +125,10 @@
       <div class="icon">S</div>
       <h3>Send</h3>
       <p>Rich message builder with automatic fallback across RCS, SMS, MMS, and WhatsApp. Two ways to use it — agent-first for developers, console-first for marketers.</p>
-      <div class="split-cta">
+      <div class="split-cta" style="grid-template-columns:repeat(3,1fr);">
         <a class="dev" href="./rcs-api.html"><small>For developers</small>Agent Delivery API →</a>
         <a class="mkt" href="#"><small>For marketers</small>Open the Console →</a>
+        <a href="./apps.html" style="background:#2a2f42;color:#fff;padding:10px 12px;border-radius:8px;text-decoration:none;font-size:12px;font-weight:600;text-align:center;display:flex;flex-direction:column;gap:2px;border:1px solid #efc845;"><small style="opacity:0.7;font-weight:500;font-size:10px;letter-spacing:0.04em;text-transform:uppercase;color:#efc845;">For Eloqua / Iterable</small>Platform Apps →</a>
       </div>
     </div>
     <div class="pillar"><div class="icon">M</div><h3>Monitor</h3><p>Real delivery tracking — not just handoff status. See what actually reached the device, per carrier, in real time.</p><div class="pillar-links"><a href="#">Learn more →</a></div></div>
@@ -135,15 +138,102 @@
   </div>
 </section>
 
+<!-- Two-layer architecture — the manifesto visualized -->
+<section style="background:#fff;padding:64px 32px;border-top:1px solid var(--line);">
+  <div style="max-width:1180px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:40px;">
+      <div class="eyebrow">The Sureshot thesis</div>
+      <h2 style="font-size:36px;color:var(--navy);margin:0 0 10px;font-weight:800;">Clean data in. Personalized messages out.</h2>
+      <p style="color:var(--muted);font-size:17px;max-width:680px;margin:0 auto;">Two layers. Every product we ship serves one of them. Use just what you need — or stack them together for the full lifecycle.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+      <!-- Layer 1: Data quality -->
+      <div style="background:linear-gradient(135deg,#f0f9ff 0%,#fff 100%);border:1px solid #c7e0f4;border-radius:14px;padding:28px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+          <div style="width:44px;height:44px;background:#1d4ed8;color:#fff;border-radius:10px;display:grid;place-items:center;font-weight:800;font-size:20px;">1</div>
+          <div>
+            <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#1d4ed8;font-weight:700;">Layer 1</div>
+            <h3 style="margin:0;font-size:22px;color:var(--navy);font-weight:800;">Clean data in</h3>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:14px;line-height:1.55;margin:0 0 16px;">Your channel isn't the problem — your data is. We validate, enrich, and verify upstream of any send. Proven to reduce dirty data by 98% (Adtalem).</p>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-weight:700;font-size:14px;color:var(--navy);">Waterfall Email Validation API</div>
+              <div style="font-size:12px;color:var(--muted);">Standalone API · multi-vendor waterfall</div>
+            </div>
+            <span style="font-size:10px;background:var(--gold);color:var(--ink);padding:3px 8px;border-radius:4px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;">Flagship</span>
+          </div>
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:12px 14px;">
+            <div style="font-weight:700;font-size:14px;color:var(--navy);">Email Validation for Eloqua</div>
+            <div style="font-size:12px;color:var(--muted);">Oracle Eloqua marketplace app</div>
+          </div>
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:12px 14px;">
+            <div style="font-weight:700;font-size:14px;color:var(--navy);">Phone Validation for Eloqua</div>
+            <div style="font-size:12px;color:var(--muted);">Oracle Eloqua marketplace app</div>
+          </div>
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:12px 14px;">
+            <div style="font-weight:700;font-size:14px;color:var(--navy);">Preflight · Risk · Consent</div>
+            <div style="font-size:12px;color:var(--muted);">Platform modules — built into Cactus</div>
+          </div>
+        </div>
+        <a href="./apps.html" style="display:inline-flex;margin-top:16px;color:#1d4ed8;font-weight:700;text-decoration:none;font-size:14px;">See all data-quality products →</a>
+      </div>
+
+      <!-- Layer 2: Messages out -->
+      <div style="background:linear-gradient(135deg,#fff8f0 0%,#fff 100%);border:1px solid #f4c7a2;border-radius:14px;padding:28px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+          <div style="width:44px;height:44px;background:var(--red);color:#fff;border-radius:10px;display:grid;place-items:center;font-weight:800;font-size:20px;">2</div>
+          <div>
+            <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);font-weight:700;">Layer 2</div>
+            <h3 style="margin:0;font-size:22px;color:var(--navy);font-weight:800;">Personalized messages out</h3>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:14px;line-height:1.55;margin:0 0 16px;">Send the right message in the right format, through the system your team already uses. Agent-first, marketer-first, or platform-embedded.</p>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-weight:700;font-size:14px;color:var(--navy);">Agent Delivery API (RCS)</div>
+              <div style="font-size:12px;color:var(--muted);">Developer-first · one endpoint, any format</div>
+            </div>
+            <span style="font-size:10px;background:var(--gold);color:var(--ink);padding:3px 8px;border-radius:4px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;">New</span>
+          </div>
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:12px 14px;">
+            <div style="font-weight:700;font-size:14px;color:var(--navy);">Cactus Console</div>
+            <div style="font-size:12px;color:var(--muted);">Marketer-first · full 6-pillar platform</div>
+          </div>
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:12px 14px;">
+            <div style="font-weight:700;font-size:14px;color:var(--navy);">Twilio SMS for Eloqua</div>
+            <div style="font-size:12px;color:var(--muted);">Oracle Eloqua marketplace app</div>
+          </div>
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:12px 14px;opacity:0.75;">
+            <div style="font-weight:700;font-size:14px;color:var(--navy);">Iterable Messaging App <span style="font-size:10px;background:#e5e7eb;color:var(--muted);padding:2px 6px;border-radius:4px;margin-left:4px;font-weight:600;">COMING</span></div>
+            <div style="font-size:12px;color:var(--muted);">Iterable marketplace app — in build</div>
+          </div>
+        </div>
+        <a href="./apps.html" style="display:inline-flex;margin-top:16px;color:var(--red);font-weight:700;text-decoration:none;font-size:14px;">See all messaging products →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="cta-band">
   <h2>Pick your entry point</h2>
   <p>Different audiences, same platform. Start wherever you are.</p>
-  <div class="cta-trio">
+  <div class="cta-trio" style="grid-template-columns:repeat(4,1fr);">
     <a class="cta-card" href="./rcs-api.html">
       <div class="label">Developers</div>
       <h3>Agent Delivery API</h3>
       <p>One endpoint. Any format. Your agent's brains → your customer's Messages app.</p>
       <span class="arrow">Explore the API →</span>
+    </a>
+    <a class="cta-card" href="./apps.html">
+      <div class="label">Platform users</div>
+      <h3>Apps for Eloqua &amp; more</h3>
+      <p>Email &amp; phone validation. SMS sending. Built into the systems your team already uses.</p>
+      <span class="arrow">Browse the apps →</span>
     </a>
     <a class="cta-card" href="./demo.html">
       <div class="label">Anyone</div>
@@ -152,7 +242,7 @@
       <span class="arrow">Send yourself a demo →</span>
     </a>
     <a class="cta-card" href="#">
-      <div class="label">Marketers / Enterprise</div>
+      <div class="label">Enterprise</div>
       <h3>Talk to Us</h3>
       <p>15-minute walkthrough. Bring a campaign, leave with a plan. Russ runs it himself.</p>
       <span class="arrow">Book a call →</span>
@@ -172,7 +262,7 @@
     <div class="brand-line"><span style="width:32px;height:32px;background:var(--red);border-radius:7px;display:grid;place-items:center;font-weight:900;font-size:16px;">S</span> Cactus <small style="opacity:0.7;font-weight:400;">by Sureshot</small></div>
     <p class="manifesto">Clean data in. Personalized messages out. The last mile — from your agent to their messages.</p>
   </div>
-  <div><h4>Platform</h4><ul><li><a href="./index.html">Overview</a></li><li><a href="./rcs-api.html">Agent API</a></li><li><a href="./demo.html">Live Demo</a></li><li><a href="#">Console</a></li></ul></div>
+  <div><h4>Platform</h4><ul><li><a href="./index.html">Overview</a></li><li><a href="./rcs-api.html">Agent API</a></li><li><a href="./apps.html">Apps</a></li><li><a href="./demo.html">Live Demo</a></li><li><a href="#">Console</a></li></ul></div>
   <div><h4>Developers</h4><ul><li><a href="#">API Docs</a></li><li><a href="#">MCP Server</a></li><li><a href="#">Changelog</a></li><li><a href="#">Status</a></li></ul></div>
   <div><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul></div>
   <div class="copyright">© Sure Shot Labs · Delaware LLC</div>
