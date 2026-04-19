@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>V4 · Cactus by Sureshot — Consolidated landing</title>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+<style>
+  .hero { background: linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; padding: 72px 32px 60px; text-align: center; }
+  .hero .eyebrow { color: var(--gold); }
+  .hero h1 { font-size: 52px; line-height: 1.08; font-weight: 800; margin: 0 0 18px; max-width: 900px; margin-left: auto; margin-right: auto; }
+  .hero h1 em { color: var(--gold); font-style: normal; }
+  .hero .sub { font-size: 19px; opacity: 0.85; max-width: 680px; margin: 0 auto 28px; }
+  .hero .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .hero .manifesto-line { margin-top: 36px; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); opacity: 0.8; }
+  @media (max-width: 600px) { .hero h1 { font-size: 34px; } }
+
+  /* Thesis — moved up, primary section */
+  .thesis { background: #fff; padding: 64px 32px; }
+  .thesis-head { text-align: center; margin-bottom: 40px; }
+  .thesis-head .eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); font-weight: 700; margin-bottom: 14px; display: inline-block; }
+  .thesis-head h2 { font-size: 40px; color: var(--navy); margin: 0 0 12px; font-weight: 800; }
+  .thesis-head p { color: var(--muted); font-size: 17px; max-width: 700px; margin: 0 auto; }
+  .thesis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1180px; margin: 0 auto; }
+  @media (max-width: 900px) { .thesis-grid { grid-template-columns: 1fr; } }
+  .layer-card { border-radius: 14px; padding: 28px; }
+  .layer-card.l1 { background: linear-gradient(135deg, #f0f9ff 0%, #fff 100%); border: 1px solid #c7e0f4; }
+  .layer-card.l2 { background: linear-gradient(135deg, #fff8f0 0%, #fff 100%); border: 1px solid #f4c7a2; }
+  .layer-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .layer-num { width: 44px; height: 44px; color: #fff; border-radius: 10px; display: grid; place-items: center; font-weight: 800; font-size: 20px; }
+  .l1 .layer-num { background: #1d4ed8; }
+  .l2 .layer-num { background: var(--red); }
+  .layer-eyebrow { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; }
+  .l1 .layer-eyebrow { color: #1d4ed8; }
+  .l2 .layer-eyebrow { color: var(--red); }
+  .layer-title { margin: 0; font-size: 24px; color: var(--navy); font-weight: 800; }
+  .layer-desc { color: var(--muted); font-size: 14px; line-height: 1.55; margin: 0 0 18px; }
+  .capture-box { border-radius: 10px; padding: 16px; margin-bottom: 14px; }
+  .l1 .capture-box { background: #eff6ff; border: 1px dashed #1d4ed8; }
+  .l2 .capture-box { background: #fff4ed; border: 1px dashed var(--red); }
+  .capture-pill { display: inline-block; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 800; margin-bottom: 6px; }
+  .l1 .capture-pill { color: #1d4ed8; }
+  .l2 .capture-pill { color: var(--red); }
+  .capture-box h4 { margin: 0 0 6px; font-size: 15px; color: var(--navy); font-weight: 700; }
+  .capture-box p { color: var(--muted); font-size: 13px; line-height: 1.5; margin: 0; }
+  .layer-more { display: inline-flex; font-weight: 700; font-size: 14px; text-decoration: none; margin-top: 4px; }
+  .l1 .layer-more { color: #1d4ed8; }
+  .l2 .layer-more { color: var(--red); }
+
+  /* Surfaces — promoted above fold with big visual treatment */
+  .surfaces { background: var(--bg); padding: 64px 32px; border-top: 1px solid var(--line); }
+  .surfaces-head { text-align: center; margin-bottom: 36px; }
+  .surfaces-head .eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); font-weight: 700; margin-bottom: 10px; display: inline-block; }
+  .surfaces-head h2 { font-size: 36px; color: var(--navy); margin: 0 0 10px; font-weight: 800; }
+  .surfaces-head p { color: var(--muted); font-size: 16px; margin: 0; max-width: 600px; margin-left: auto; margin-right: auto; }
+  .surfaces-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 1180px; margin: 0 auto; }
+  @media (max-width: 900px) { .surfaces-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .surfaces-grid { grid-template-columns: 1fr; } }
+  .surface-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; text-decoration: none; color: var(--navy); transition: all 0.15s; display: flex; flex-direction: column; gap: 10px; }
+  .surface-card:hover { border-color: var(--red); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+  .surface-card .surface-icon { width: 48px; height: 48px; border-radius: 10px; display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 18px; }
+  .surface-card .surface-icon.console { background: linear-gradient(135deg, var(--navy), var(--navy-2)); }
+  .surface-card .surface-icon.api { background: linear-gradient(135deg, #1d4ed8, #1e3a8a); }
+  .surface-card .surface-icon.apps { background: linear-gradient(135deg, #dc2626, #991b1b); }
+  .surface-card .surface-icon.demo { background: linear-gradient(135deg, var(--gold), #b8860b); color: var(--ink); }
+  .surface-card h3 { margin: 0; font-size: 19px; font-weight: 800; color: var(--navy); }
+  .surface-card .for-who { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); font-weight: 700; }
+  .surface-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
+  .surface-card .arrow { margin-top: auto; padding-top: 6px; color: var(--navy); font-weight: 700; font-size: 13px; }
+
+  /* Personas — secondary chip strip on navy */
+  .personas-strip { padding: 48px 32px; background: var(--navy); color: #fff; text-align: center; }
+  .personas-strip h2 { margin: 0 0 6px; font-size: 22px; font-weight: 700; }
+  .personas-strip .sub { color: #cfd3e1; font-size: 14px; margin: 0 0 22px; }
+  .persona-chips { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 1100px; margin: 0 auto; }
+  .persona-chip { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 999px; padding: 10px 18px; font-size: 13px; font-weight: 600; color: #fff; text-decoration: none; transition: all 0.15s; }
+  .persona-chip:hover { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+  .persona-chip b { color: var(--gold); font-weight: 700; margin-right: 6px; }
+  .persona-chip:hover b { color: var(--red); }
+
+  /* Trust */
+  .logos { padding: 40px 32px; text-align: center; background: #fff; border-top: 1px solid var(--line); }
+  .logos .label { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; }
+  .logo-row { display: flex; justify-content: center; gap: 36px; flex-wrap: wrap; opacity: 0.6; font-weight: 700; font-size: 15px; color: var(--navy); }
+
+  /* Pre-footer surface bar */
+  .surface-bar { background: #fff; border-top: 1px solid var(--line); padding: 28px 32px; text-align: center; }
+  .surface-bar .label { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; font-weight: 700; }
+  .surface-bar .row { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+  .surface-bar a { padding: 8px 16px; border-radius: 8px; border: 1px solid var(--line); color: var(--navy); text-decoration: none; font-size: 13px; font-weight: 700; }
+  .surface-bar a:hover { border-color: var(--red); color: var(--red); }
+</style>
+</head>
+<body>
+
+<div class="scope-mock">
+  <span><b>VARIANT V4 — CONSOLIDATED</b> · Hero → Thesis → Surfaces → Personas → Trust</span>
+  <div class="crumbs">
+    <a href="./versions.html">← All variants</a>
+    <a href="./index.html">Current</a>
+    <a href="./index-v2.html">V2</a>
+    <a href="./index-v3.html">V3</a>
+    <a href="./index-v4.html" class="current">V4</a>
+  </div>
+</div>
+
+<nav class="topnav">
+  <a href="./index.html" class="brand"><span class="mark">S</span> Cactus <small>by Sureshot</small></a>
+  <div class="links">
+    <a href="./index-v4.html" class="active">Platform</a>
+    <a href="./rcs-api.html">Agent API</a>
+    <a href="./apps-v4.html">Apps</a>
+    <a href="./console-v4.html">Console</a>
+    <a href="./demo.html">Demo</a>
+    <a href="#">Docs</a>
+    <a href="#" class="cta-nav">Talk to Us</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="eyebrow">Cactus — The messaging platform</div>
+  <h1>The complete <em>messaging lifecycle</em></h1>
+  <p class="sub">Numbers. Validation. Consent. Registration. Risk. Send. Monitor. Inbox. Agent. Insights. All in one platform — built for the teams who need messaging to actually work.</p>
+  <div class="cta-row">
+    <a class="btn btn-primary btn-lg" href="./demo.html">▶ See it live on your phone</a>
+    <a class="btn btn-secondary btn-lg" style="color:#fff;border-color:#fff" href="#">Talk to Us</a>
+  </div>
+  <div class="manifesto-line">Clean data in. Personalized messages out.</div>
+</section>
+
+<!-- Thesis — promoted to primary position -->
+<section class="thesis">
+  <div class="thesis-head">
+    <div class="eyebrow">The Sureshot thesis</div>
+    <h2>Clean data in. Personalized messages out.</h2>
+    <p>Two layers. Every product we ship serves one of them. Use just what you need — or stack them together for the full lifecycle.</p>
+  </div>
+  <div class="thesis-grid">
+    <div class="layer-card l1">
+      <div class="layer-head">
+        <div class="layer-num">1</div>
+        <div>
+          <div class="layer-eyebrow">Layer 1</div>
+          <h3 class="layer-title">Clean data in</h3>
+        </div>
+      </div>
+      <p class="layer-desc">Your channel isn't the problem — your data is. We validate, enrich, and verify upstream of any send. Proven to reduce dirty data by 98% (Adtalem).</p>
+      <div class="capture-box">
+        <div class="capture-pill">▶ Try it free</div>
+        <h4>Send us a list. Get a waterfall sample back.</h4>
+        <p>Upload a list of emails. We'll run them through our multi-vendor waterfall and text you a sample report — which validators caught what, where the dirty data lives, what you'd save.</p>
+      </div>
+      <a href="./apps-v4.html" class="layer-more">See all data-quality products →</a>
+    </div>
+
+    <div class="layer-card l2">
+      <div class="layer-head">
+        <div class="layer-num">2</div>
+        <div>
+          <div class="layer-eyebrow">Layer 2</div>
+          <h3 class="layer-title">Personalized messages out</h3>
+        </div>
+      </div>
+      <p class="layer-desc">Send the right message in the right format, through the system your team already uses. Agent-first, marketer-first, or platform-embedded.</p>
+      <div class="capture-box">
+        <div class="capture-pill">▶ Try it free</div>
+        <h4>Send yourself a live RCS message.</h4>
+        <p>Pick a template from the gallery. Enter your phone. Watch a real RCS card land on your device — text, cards, carousels, interactive actions.</p>
+      </div>
+      <a href="./apps-v4.html" class="layer-more">See all messaging products →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Surfaces — primary entry point -->
+<section class="surfaces">
+  <div class="surfaces-head">
+    <div class="eyebrow">Pick your entry point</div>
+    <h2>Four surfaces. One platform.</h2>
+    <p>Pick where you want to start. We keep the same manifesto underneath all of them.</p>
+  </div>
+  <div class="surfaces-grid">
+    <a class="surface-card" href="./console-v4.html">
+      <div class="surface-icon console">C</div>
+      <div class="for-who">For agencies &amp; marketers</div>
+      <h3>Cactus Console</h3>
+      <p>Full 6-pillar platform in a web workspace. Campaigns, registration, inbox, analytics — all in one place.</p>
+      <span class="arrow">See the console →</span>
+    </a>
+    <a class="surface-card" href="./rcs-api.html">
+      <div class="surface-icon api">API</div>
+      <div class="for-who">For developers &amp; AI agents</div>
+      <h3>Agent Delivery API</h3>
+      <p>One endpoint. Any format. Send plain text or structured items — we render the right RCS card.</p>
+      <span class="arrow">Explore the API →</span>
+    </a>
+    <a class="surface-card" href="./apps-v4.html">
+      <div class="surface-icon apps">A</div>
+      <div class="for-who">For platform teams</div>
+      <h3>Apps &amp; integrations</h3>
+      <p>Eloqua, Iterable, MCP. Drop into the stack you already run. Same engine behind every one.</p>
+      <span class="arrow">Browse the apps →</span>
+    </a>
+    <a class="surface-card" href="./demo.html">
+      <div class="surface-icon demo">▶</div>
+      <div class="for-who">For anyone</div>
+      <h3>Live demo</h3>
+      <p>Type your phone number. Pick an example. Watch a real RCS message land on your device.</p>
+      <span class="arrow">Send yourself a demo →</span>
+    </a>
+  </div>
+</section>
+
+<!-- Personas — secondary chip strip -->
+<section class="personas-strip">
+  <h2>Or pick by who you are</h2>
+  <p class="sub">Same platform. Different front doors.</p>
+  <div class="persona-chips">
+    <a class="persona-chip" href="./rcs-api.html"><b>Developer</b> → Agent API</a>
+    <a class="persona-chip" href="./console-v4.html"><b>Marketer</b> → Console</a>
+    <a class="persona-chip" href="./apps-v4.html"><b>Platform user</b> → Eloqua / Iterable</a>
+    <a class="persona-chip" href="./apps-v4.html"><b>Product / no-code</b> → MCP + apps</a>
+    <a class="persona-chip" href="#"><b>Playing with Claude Code?</b> → MCP server</a>
+    <a class="persona-chip" href="#"><b>Enterprise</b> → Talk to Us</a>
+  </div>
+</section>
+
+<!-- Trust -->
+<div class="logos">
+  <div class="label">Trusted by</div>
+  <div class="logo-row">
+    <span>Dun &amp; Bradstreet</span><span>Cisco</span><span>JLL</span><span>Dell</span><span>Informa</span><span>PepsiCo</span>
+  </div>
+</div>
+
+<!-- Pre-footer orientation bar -->
+<div class="surface-bar">
+  <div class="label">Explore</div>
+  <div class="row">
+    <a href="./console-v4.html">Console</a>
+    <a href="./rcs-api.html">Agent API</a>
+    <a href="./apps-v4.html">Apps &amp; integrations</a>
+    <a href="./demo.html">Live demo</a>
+    <a href="#">Docs</a>
+    <a href="#">Blog</a>
+    <a href="#">Talk to Us</a>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="brand-col">
+    <div class="brand-line"><span style="width:32px;height:32px;background:var(--red);border-radius:7px;display:grid;place-items:center;font-weight:900;font-size:16px;">S</span> Cactus <small style="opacity:0.7;font-weight:400;">by Sureshot</small></div>
+    <p class="manifesto">Clean data in. Personalized messages out. The last mile — from your agent to their messages.</p>
+  </div>
+  <div><h4>Platform</h4><ul><li><a href="./index-v4.html">Overview</a></li><li><a href="./rcs-api.html">Agent API</a></li><li><a href="./apps-v4.html">Apps</a></li><li><a href="./console-v4.html">Console</a></li><li><a href="./demo.html">Live Demo</a></li></ul></div>
+  <div><h4>Developers</h4><ul><li><a href="#">API Docs</a></li><li><a href="#">MCP Server</a></li><li><a href="#">Changelog</a></li><li><a href="#">Status</a></li></ul></div>
+  <div><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul></div>
+  <div class="copyright">© Sure Shot Labs · Delaware LLC</div>
+</footer>
+
+</body>
+</html>
