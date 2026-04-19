@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cactus Console — The complete messaging lifecycle</title>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+<style>
+  .hero { background: linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; padding: 72px 32px 60px; text-align: center; }
+  .hero .eyebrow { color: var(--gold); }
+  .hero h1 { font-size: 48px; line-height: 1.08; font-weight: 800; margin: 0 0 18px; max-width: 900px; margin-left: auto; margin-right: auto; }
+  .hero h1 em { color: var(--gold); font-style: normal; }
+  .hero .sub { font-size: 18px; opacity: 0.88; max-width: 720px; margin: 0 auto 28px; }
+  .hero .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .hero .audience { margin-top: 30px; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); opacity: 0.85; }
+  @media (max-width: 600px) { .hero h1 { font-size: 32px; } }
+
+  /* Lifecycle bar (shared idiom) */
+  .lifecycle { padding: 40px 32px; background: #fff; border-bottom: 1px solid var(--line); }
+  .lifecycle h2 { text-align: center; font-size: 15px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin: 0 0 24px; }
+  .lifecycle .steps { display: flex; gap: 8px; justify-content: center; align-items: center; flex-wrap: wrap; max-width: 1100px; margin: 0 auto; }
+  .step { padding: 10px 14px; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; font-size: 13px; font-weight: 600; color: var(--navy); }
+  .step-arrow { color: var(--muted); }
+
+  /* Module blocks — alternating full-width */
+  .module {
+    padding: 56px 32px;
+    border-bottom: 1px solid var(--line);
+  }
+  .module.alt { background: #fff; }
+  .module-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  @media (max-width: 900px) { .module-inner { grid-template-columns: 1fr; gap: 28px; } }
+  .module-inner.reverse .module-copy { order: 2; }
+  .module-inner.reverse .module-visual { order: 1; }
+  @media (max-width: 900px) { .module-inner.reverse .module-copy, .module-inner.reverse .module-visual { order: 0; } }
+
+  .module-copy .tag { display: inline-block; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 800; padding: 4px 10px; border-radius: 4px; background: var(--gold); color: var(--ink); margin-bottom: 14px; }
+  .module-copy h2 { font-size: 32px; color: var(--navy); margin: 0 0 10px; font-weight: 800; line-height: 1.15; }
+  .module-copy .lead { font-size: 16px; color: var(--muted); margin: 0 0 20px; line-height: 1.55; }
+  .module-copy ul { list-style: none; padding: 0; margin: 0 0 22px; display: flex; flex-direction: column; gap: 10px; }
+  .module-copy li { display: flex; gap: 10px; font-size: 14px; color: var(--ink); line-height: 1.5; }
+  .module-copy li::before { content: "●"; color: var(--red); font-size: 14px; flex-shrink: 0; padding-top: 1px; }
+  .module-copy li b { color: var(--navy); font-weight: 700; }
+  .module-cta { display: flex; gap: 10px; flex-wrap: wrap; }
+  .module-cta a { font-size: 14px; font-weight: 700; text-decoration: none; padding: 10px 16px; border-radius: 8px; }
+  .module-cta a.primary { background: var(--red); color: #fff; }
+  .module-cta a.primary:hover { background: var(--red-dark); }
+  .module-cta a.ghost { background: transparent; color: var(--navy); border: 1.5px solid var(--navy); }
+  .module-cta a.ghost:hover { background: var(--navy); color: #fff; }
+  .phone-capture-note { font-size: 12px; color: var(--muted); margin-top: 12px; font-style: italic; }
+  .phone-capture-note b { color: var(--red); font-style: normal; font-weight: 700; }
+
+  /* Visual panel — a stylized dashboard preview */
+  .module-visual { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: 0 8px 30px rgba(0,0,0,0.04); }
+  .module.alt .module-visual { background: var(--bg); }
+  .preview-head { display: flex; justify-content: space-between; align-items: center; padding-bottom: 10px; border-bottom: 1px solid var(--line); margin-bottom: 12px; font-size: 12px; color: var(--muted); }
+  .preview-head b { color: var(--navy); font-weight: 700; }
+  .preview-head .status { padding: 2px 8px; border-radius: 4px; background: #dcfce7; color: #166534; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+  .preview-row { display: flex; justify-content: space-between; padding: 8px 0; font-size: 13px; border-bottom: 1px dashed var(--line); }
+  .preview-row:last-child { border-bottom: 0; }
+  .preview-row .k { color: var(--muted); }
+  .preview-row .v { color: var(--navy); font-weight: 700; }
+  .preview-row .v.ok { color: #166534; }
+  .preview-row .v.warn { color: #a16207; }
+  .preview-row .v.bad { color: var(--red); }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 0; }
+  .stat { background: var(--bg); border-radius: 8px; padding: 10px; text-align: center; }
+  .stat .n { font-size: 22px; font-weight: 800; color: var(--navy); }
+  .stat .l { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+
+  /* Extended modules grid */
+  .extended { padding: 64px 32px; background: var(--bg); }
+  .extended-head { text-align: center; max-width: 760px; margin: 0 auto 36px; }
+  .extended-head h2 { font-size: 32px; color: var(--navy); margin: 0 0 10px; font-weight: 800; }
+  .extended-head p { color: var(--muted); font-size: 16px; }
+  .ext-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 1100px; margin: 0 auto; }
+  @media (max-width: 900px) { .ext-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .ext-grid { grid-template-columns: 1fr; } }
+  .ext-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+  .ext-card h3 { margin: 0 0 6px; color: var(--navy); font-size: 17px; font-weight: 700; }
+  .ext-card .badge { display: inline-block; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; background: var(--gold); color: var(--ink); font-weight: 800; margin-bottom: 8px; }
+  .ext-card p { color: var(--muted); font-size: 13px; margin: 0 0 12px; line-height: 1.5; }
+  .ext-card ul { list-style: none; padding: 0; margin: 0 0 12px; font-size: 12px; color: var(--ink); display: flex; flex-direction: column; gap: 4px; }
+  .ext-card li::before { content: "✓ "; color: var(--red); font-weight: 800; }
+  .ext-card a { font-size: 13px; font-weight: 700; color: var(--navy); text-decoration: none; }
+  .ext-card a:hover { color: var(--red); }
+
+  /* Who it's for */
+  .audience-band { background: var(--navy); color: #fff; padding: 56px 32px; text-align: center; }
+  .audience-band h2 { font-size: 30px; margin: 0 0 10px; }
+  .audience-band p { color: #cfd3e1; font-size: 16px; margin: 0 0 28px; max-width: 620px; margin-left: auto; margin-right: auto; }
+  .audience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 900px; margin: 0 auto; text-align: left; }
+  @media (max-width: 780px) { .audience-grid { grid-template-columns: 1fr; } }
+  .aud-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius); padding: 22px; }
+  .aud-card .who { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 6px; }
+  .aud-card h3 { margin: 0 0 8px; font-size: 18px; }
+  .aud-card p { color: #cfd3e1; font-size: 13px; margin: 0; line-height: 1.5; }
+
+  /* Final CTA */
+  .final { padding: 56px 32px; background: #fff; text-align: center; border-top: 1px solid var(--line); }
+  .final h2 { font-size: 32px; color: var(--navy); margin: 0 0 10px; font-weight: 800; }
+  .final p { color: var(--muted); font-size: 16px; margin: 0 0 28px; max-width: 580px; margin-left: auto; margin-right: auto; }
+</style>
+</head>
+<body>
+
+<div class="scope-mock">
+  <span><b>SCOPE MOCK</b> — New surface: <b>/console</b> (deep product page for the Cactus Console)</span>
+  <div class="crumbs">
+    <a href="./versions.html">← All variants</a>
+    <a href="./index.html">Landing</a>
+    <a href="./rcs-api.html">Agent API</a>
+    <a href="./apps.html">Apps</a>
+    <a href="./console.html" class="current">Console</a>
+    <a href="./demo.html">Demo</a>
+  </div>
+</div>
+
+<nav class="topnav">
+  <a href="./index.html" class="brand"><span class="mark">S</span> Cactus <small>by Sureshot</small></a>
+  <div class="links">
+    <a href="./index.html">Platform</a>
+    <a href="./rcs-api.html">Agent API</a>
+    <a href="./apps.html">Apps</a>
+    <a href="./console.html" class="active">Console</a>
+    <a href="./demo.html">Demo</a>
+    <a href="#">Docs</a>
+    <a href="#" class="cta-nav">Talk to Us</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="eyebrow">Cactus Console</div>
+  <h1>The complete <em>messaging lifecycle</em> — in one workspace</h1>
+  <p class="sub">From number provisioning to AI-powered conversation. SMS, MMS, RCS, and WhatsApp — domestic and global. Know it'll land. Prove it worked. Automate the reply.</p>
+  <div class="cta-row">
+    <a class="btn btn-primary btn-lg" href="./demo.html">▶ See it live on your phone</a>
+    <a class="btn btn-secondary btn-lg" style="color:#fff;border-color:#fff" href="#">Talk to Us</a>
+  </div>
+  <div class="audience">For marketing teams · agencies · in-house operators</div>
+</section>
+
+<div class="lifecycle">
+  <h2>End-to-end coverage</h2>
+  <div class="steps">
+    <span class="step">Numbers</span><span class="step-arrow">→</span>
+    <span class="step">Validate</span><span class="step-arrow">→</span>
+    <span class="step">Consent</span><span class="step-arrow">→</span>
+    <span class="step">Register</span><span class="step-arrow">→</span>
+    <span class="step">Risk</span><span class="step-arrow">→</span>
+    <span class="step">Send</span><span class="step-arrow">→</span>
+    <span class="step">Monitor</span><span class="step-arrow">→</span>
+    <span class="step">Inbox</span><span class="step-arrow">→</span>
+    <span class="step">Agent</span><span class="step-arrow">→</span>
+    <span class="step">Insights</span>
+  </div>
+</div>
+
+<!-- Risk -->
+<section class="module">
+  <div class="module-inner">
+    <div class="module-copy">
+      <span class="tag">Free tier</span>
+      <h2>Risk — compliance intelligence</h2>
+      <p class="lead">Pre-flight and post-flight compliance in one place. Scan messages before they send, then continuously monitor your privacy policies, opt-in language, and consent flows for compliance drift.</p>
+      <ul>
+        <li><b>Message scanning</b> — check against carrier rules, flag risky URLs, validate opt-out language</li>
+        <li><b>TCPA validation</b> — verify consent requirements before sending</li>
+        <li><b>Privacy policy monitoring</b> — detect policy changes that break compliance</li>
+        <li><b>Opt-in language audit</b> — scan web forms and disclosures for compliance drift</li>
+      </ul>
+      <div class="module-cta">
+        <a class="primary" href="#scan">▶ Scan a message free</a>
+        <a class="ghost" href="#">Learn more</a>
+      </div>
+      <p class="phone-capture-note"><b>How it works:</b> paste your message, get a quick risk score in the browser. Want the full breakdown (carrier-by-carrier flags, detailed fixes)? We send it to your phone as an RCS card.</p>
+    </div>
+    <div class="module-visual">
+      <div class="preview-head"><b>Risk scan</b> <span class="status">Safe</span></div>
+      <div class="stat-grid">
+        <div class="stat"><div class="n">92</div><div class="l">Risk score</div></div>
+        <div class="stat"><div class="n" style="color:#166534;">PASS</div><div class="l">TCPA</div></div>
+        <div class="stat"><div class="n" style="color:#a16207;">WARN</div><div class="l">Link</div></div>
+      </div>
+      <div class="preview-row"><span class="k">Carrier rules</span><span class="v ok">PASS</span></div>
+      <div class="preview-row"><span class="k">Opt-out language</span><span class="v ok">Present</span></div>
+      <div class="preview-row"><span class="k">URL shortener</span><span class="v warn">Flag: bit.ly</span></div>
+      <div class="preview-row"><span class="k">STOP keyword honored</span><span class="v ok">Yes</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Send -->
+<section class="module alt">
+  <div class="module-inner reverse">
+    <div class="module-copy">
+      <span class="tag" style="background:var(--red);color:#fff;">RCS + WhatsApp</span>
+      <h2>Send — rich message builder</h2>
+      <p class="lead">Create stunning rich messages with cards, carousels, and quick replies. Build once, deliver across SMS, RCS, and WhatsApp automatically.</p>
+      <ul>
+        <li><b>RCS rich cards</b> — images, buttons, carousels</li>
+        <li><b>WhatsApp templates</b> — approved message templates</li>
+        <li><b>Auto-fallback</b> — graceful degradation to SMS</li>
+        <li><b>Build once, deliver everywhere</b> — same payload, channel-appropriate format</li>
+      </ul>
+      <div class="module-cta">
+        <a class="primary" href="./demo.html">▶ Send yourself a rich message</a>
+        <a class="ghost" href="#">Build rich message</a>
+      </div>
+      <p class="phone-capture-note"><b>How it works:</b> pick a template from the gallery. We send it to your phone as a real RCS card and you can see exactly what your customers will see.</p>
+    </div>
+    <div class="module-visual">
+      <div class="preview-head"><b>Rich message preview</b> <span class="status">Live</span></div>
+      <div style="background:#f1f5f9;border-radius:10px;padding:14px;margin-bottom:8px;">
+        <div style="background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,0.06);">
+          <div style="background:linear-gradient(135deg,#1d4ed8,#6b21a8);height:80px;"></div>
+          <div style="padding:12px;"><div style="font-weight:700;font-size:13px;color:var(--navy);">Your appointment is tomorrow</div><div style="font-size:12px;color:var(--muted);margin-top:2px;">Tues 10:00 AM · Main St clinic</div></div>
+          <div style="display:flex;gap:6px;padding:0 12px 12px;"><span style="background:var(--navy);color:#fff;padding:6px 10px;border-radius:6px;font-size:11px;font-weight:700;">Confirm</span><span style="background:#fff;border:1px solid var(--line);padding:6px 10px;border-radius:6px;font-size:11px;font-weight:700;">Reschedule</span></div>
+        </div>
+      </div>
+      <div class="preview-row"><span class="k">Channel selected</span><span class="v">RCS</span></div>
+      <div class="preview-row"><span class="k">Fallback</span><span class="v">SMS (auto)</span></div>
+      <div class="preview-row"><span class="k">Interactive actions</span><span class="v ok">2 buttons</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Monitor -->
+<section class="module">
+  <div class="module-inner">
+    <div class="module-copy">
+      <span class="tag">Real-time</span>
+      <h2>Monitor — delivery intelligence</h2>
+      <p class="lead">Real delivery status, not just "handed off." Track carrier filtering, opt-out rates, complaint signals in real-time across all channels.</p>
+      <ul>
+        <li><b>Real-time tracking</b> — per-message delivery confirmation</li>
+        <li><b>Carrier insights</b> — filtering and rate-limit visibility</li>
+        <li><b>Multi-channel</b> — SMS, RCS, WhatsApp in one view</li>
+        <li><b>Fake DLR detection</b> — catch routes that lie about delivery</li>
+      </ul>
+      <div class="module-cta">
+        <a class="primary" href="#dashboard">▶ See a live dashboard</a>
+        <a class="ghost" href="#">View dashboard</a>
+      </div>
+      <p class="phone-capture-note"><b>How it works:</b> we'll send you a test message and you'll see the delivery timeline — handoff, carrier acceptance, device receipt — live on your phone and in the dashboard.</p>
+    </div>
+    <div class="module-visual">
+      <div class="preview-head"><b>Last 24 hours</b> <span class="status">Live</span></div>
+      <div class="stat-grid">
+        <div class="stat"><div class="n">98.4%</div><div class="l">Delivered</div></div>
+        <div class="stat"><div class="n">1.2%</div><div class="l">Pending</div></div>
+        <div class="stat"><div class="n">0.4%</div><div class="l">Failed</div></div>
+      </div>
+      <div class="preview-row"><span class="k">SMS</span><span class="v">32,451 · 98.1%</span></div>
+      <div class="preview-row"><span class="k">RCS</span><span class="v ok">8,234 · 99.2%</span></div>
+      <div class="preview-row"><span class="k">WhatsApp</span><span class="v ok">12,162 · 99.8%</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Register -->
+<section class="module alt">
+  <div class="module-inner reverse">
+    <div class="module-copy">
+      <span class="tag">Automated</span>
+      <h2>Register — campaign registration</h2>
+      <p class="lead">10DLC, toll-free verification, RCS brand setup, WhatsApp Business API. We handle the carrier and Meta paperwork.</p>
+      <ul>
+        <li><b>10DLC registration</b> — A2P brand and campaign registration</li>
+        <li><b>RCS agent setup</b> — Google Business Messages verification</li>
+        <li><b>WhatsApp Business</b> — Meta verification and template approval</li>
+        <li><b>Toll-free vetting</b> — Somos submission, carrier review tracking</li>
+      </ul>
+      <div class="module-cta">
+        <a class="primary" href="#">▶ Start registration</a>
+        <a class="ghost" href="#">Registration guide</a>
+      </div>
+      <p class="phone-capture-note"><b>How it works:</b> tell us what you need to register. We'll text you a registration checklist, a time estimate, and a link to start when you're ready.</p>
+    </div>
+    <div class="module-visual">
+      <div class="preview-head"><b>Acme Corp · registrations</b> <span class="status">3 active</span></div>
+      <div class="preview-row"><span class="k">10DLC brand</span><span class="v ok">Approved · 85/100</span></div>
+      <div class="preview-row"><span class="k">RCS agent</span><span class="v ok">Verified</span></div>
+      <div class="preview-row"><span class="k">WhatsApp Business</span><span class="v ok">12 templates live</span></div>
+      <div class="preview-row"><span class="k">Toll-free</span><span class="v warn">Verizon review</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Agent -->
+<section class="module">
+  <div class="module-inner">
+    <div class="module-copy">
+      <span class="tag">AI-powered</span>
+      <h2>Agent — inbound automation</h2>
+      <p class="lead">Let AI handle your inbound messages 24/7. Automatically respond to customer inquiries, qualify leads, answer FAQs, and hand off to humans when needed — across SMS, RCS, and WhatsApp.</p>
+      <ul>
+        <li><b>Auto-respond</b> — AI answers inbound messages instantly</li>
+        <li><b>Lead qualification</b> — score and route based on conversation</li>
+        <li><b>Multi-channel</b> — same AI across SMS, RCS, WhatsApp</li>
+        <li><b>Human handoff</b> — escalate on keyword, sentiment, or confidence</li>
+      </ul>
+      <div class="module-cta">
+        <a class="primary" href="#">▶ Try an agent conversation</a>
+        <a class="ghost" href="#">Configure agent</a>
+      </div>
+      <p class="phone-capture-note"><b>How it works:</b> we'll text you with our demo agent. Ask it anything — see lead scoring, handoff rules, and the qualification trail delivered back to you.</p>
+    </div>
+    <div class="module-visual">
+      <div class="preview-head"><b>Today · 47 conversations</b> <span class="status">94% auto-resolved</span></div>
+      <div class="preview-row"><span class="k">SMS · business hours</span><span class="v ok">Auto · 1.2s</span></div>
+      <div class="preview-row"><span class="k">WhatsApp · pricing</span><span class="v" style="color:#ea580c;">Score 85 🔥</span></div>
+      <div class="preview-row"><span class="k">RCS · order tracking</span><span class="v">Awaiting reply</span></div>
+      <div class="preview-row"><span class="k">SMS · cancellation</span><span class="v bad">Human (Sarah)</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Global -->
+<section class="module alt">
+  <div class="module-inner reverse">
+    <div class="module-copy">
+      <span class="tag">190+ countries</span>
+      <h2>Global — international messaging</h2>
+      <p class="lead">Send worldwide with confidence. Country-specific compliance, sender ID registration, and WhatsApp as your global reach channel.</p>
+      <ul>
+        <li><b>Compliance database</b> — GDPR, CASL, regional rules per country</li>
+        <li><b>WhatsApp global</b> — 2B+ users, no sender ID required</li>
+        <li><b>Smart routing</b> — auto-select best channel per country</li>
+        <li><b>DLT &amp; sender ID</b> — local regulation handling where needed</li>
+      </ul>
+      <div class="module-cta">
+        <a class="primary" href="#">▶ Plan a global campaign</a>
+        <a class="ghost" href="#">Explore global</a>
+      </div>
+      <p class="phone-capture-note"><b>How it works:</b> tell us your country list, we'll text you a channel-by-country playbook — SMS, RCS, or WhatsApp recommended for each market, with compliance notes.</p>
+    </div>
+    <div class="module-visual">
+      <div class="preview-head"><b>Country routing</b> <span class="status">Optimized</span></div>
+      <div class="preview-row"><span class="k">🇺🇸 United States</span><span class="v">SMS · RCS · WhatsApp</span></div>
+      <div class="preview-row"><span class="k">🇧🇷 Brazil</span><span class="v ok">WhatsApp ⭐</span></div>
+      <div class="preview-row"><span class="k">🇮🇳 India</span><span class="v ok">WhatsApp ⭐</span></div>
+      <div class="preview-row"><span class="k">🇬🇧 United Kingdom</span><span class="v">SMS · WhatsApp</span></div>
+      <div class="preview-row"><span class="k">🇦🇪 UAE</span><span class="v warn">DLT required</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Extended modules -->
+<section class="extended">
+  <div class="extended-head">
+    <h2>Everything else in the lifecycle</h2>
+    <p>The pieces you don't always think about — until you need them. All built into the same console.</p>
+  </div>
+  <div class="ext-grid">
+    <div class="ext-card">
+      <span class="badge">Instant</span>
+      <h3>Numbers</h3>
+      <p>Find and provision phone numbers instantly. Area code, vanity patterns, toll-free.</p>
+      <ul><li>Area-code search</li><li>Vanity matching · 704-CARS</li><li>Toll-free instant</li></ul>
+      <a href="#">Search numbers →</a>
+    </div>
+    <div class="ext-card">
+      <span class="badge">100 free/mo</span>
+      <h3>Validate</h3>
+      <p>Real-time phone validation. Line type, carrier lookup, SMS/WhatsApp capable.</p>
+      <ul><li>Line type · mobile / landline / VoIP</li><li>Carrier ID · AT&amp;T, VZW, TMO</li><li>Bulk · 1M+ numbers</li></ul>
+      <a href="#">Start validating →</a>
+    </div>
+    <div class="ext-card">
+      <span class="badge">TCPA</span>
+      <h3>Consent</h3>
+      <p>Capture, store, and prove consent. Widgets, double opt-in, audit trails.</p>
+      <ul><li>Lawsuit-proof records</li><li>Timestamped audit trails</li><li>Auto suppression list</li></ul>
+      <a href="#">Manage consent →</a>
+    </div>
+    <div class="ext-card">
+      <span class="badge">Unified</span>
+      <h3>Inbox</h3>
+      <p>SMS, RCS, WhatsApp conversations in one view with team routing.</p>
+      <ul><li>Unified across channels</li><li>Agent routing &amp; assignment</li><li>Quick-reply templates</li></ul>
+      <a href="#">Open inbox →</a>
+    </div>
+    <div class="ext-card">
+      <span class="badge">A/B test</span>
+      <h3>Insights</h3>
+      <p>A/B testing, send-time optimization, engagement scoring, ROI attribution.</p>
+      <ul><li>Content · timing · channel tests</li><li>SMS vs RCS vs WhatsApp perf</li><li>Executive dashboards</li></ul>
+      <a href="#">View analytics →</a>
+    </div>
+    <div class="ext-card">
+      <span class="badge">Real devices</span>
+      <h3>QA</h3>
+      <p>Test on real devices, real carriers, real locations. Not simulators.</p>
+      <ul><li>Physical SIMs · AT&amp;T / VZW / TMO</li><li>50-country device fleet</li><li>Fake-DLR detection</li></ul>
+      <a href="#">Run test campaign →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Who it's for -->
+<section class="audience-band">
+  <h2>Built for the teams who run messaging at scale</h2>
+  <p>The console is the workspace. The platform underneath is the same one powering the Agent Delivery API and our Eloqua apps.</p>
+  <div class="audience-grid">
+    <div class="aud-card">
+      <div class="who">Agencies</div>
+      <h3>One console, many clients</h3>
+      <p>Sub-accounts, per-client billing, agency-level analytics. Register once, deploy per campaign.</p>
+    </div>
+    <div class="aud-card">
+      <div class="who">In-house marketers</div>
+      <h3>Campaigns without the ops burden</h3>
+      <p>Skip Twilio-plus-spreadsheet setups. Cactus handles registration, compliance, and delivery in one workspace.</p>
+    </div>
+    <div class="aud-card">
+      <div class="who">Operators &amp; RevOps</div>
+      <h3>Messaging as infrastructure</h3>
+      <p>Pipe events from Salesforce, Iterable, Eloqua, HubSpot. Cactus sends the right message on the right channel.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="final">
+  <h2>Ready to see the full platform?</h2>
+  <p>Send yourself a live RCS message, or talk to Russ about your campaign.</p>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+    <a class="btn btn-primary btn-lg" href="./demo.html">▶ Send yourself a demo</a>
+    <a class="btn btn-secondary btn-lg" href="#">Talk to Us</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="brand-col">
+    <div class="brand-line"><span style="width:32px;height:32px;background:var(--red);border-radius:7px;display:grid;place-items:center;font-weight:900;font-size:16px;">S</span> Cactus <small style="opacity:0.7;font-weight:400;">by Sureshot</small></div>
+    <p class="manifesto">Clean data in. Personalized messages out. The last mile — from your agent to their messages.</p>
+  </div>
+  <div><h4>Platform</h4><ul><li><a href="./index.html">Overview</a></li><li><a href="./rcs-api.html">Agent API</a></li><li><a href="./apps.html">Apps</a></li><li><a href="./console.html">Console</a></li><li><a href="./demo.html">Live Demo</a></li></ul></div>
+  <div><h4>Developers</h4><ul><li><a href="#">API Docs</a></li><li><a href="#">MCP Server</a></li><li><a href="#">Changelog</a></li><li><a href="#">Status</a></li></ul></div>
+  <div><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul></div>
+  <div class="copyright">© Sure Shot Labs · Delaware LLC</div>
+</footer>
+
+</body>
+</html>

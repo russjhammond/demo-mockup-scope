@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Variants index — Cactus mockup</title>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+<style>
+  body { background: var(--bg); }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 48px 32px; }
+  .wrap h1 { font-size: 34px; color: var(--navy); margin: 0 0 6px; font-weight: 800; }
+  .wrap .lead { color: var(--muted); font-size: 16px; margin: 0 0 30px; }
+  .group { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; margin-bottom: 22px; }
+  .group h2 { margin: 0 0 4px; font-size: 20px; color: var(--navy); font-weight: 800; }
+  .group .sub { color: var(--muted); font-size: 14px; margin: 0 0 18px; }
+  .variants { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  @media (max-width: 780px) { .variants { grid-template-columns: 1fr; } }
+  .variant { background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 16px; text-decoration: none; color: var(--navy); transition: all 0.15s; display: flex; flex-direction: column; gap: 6px; }
+  .variant:hover { border-color: var(--red); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.04); }
+  .variant .tag { display: inline-block; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 800; padding: 3px 8px; border-radius: 4px; width: fit-content; }
+  .variant .tag.current { background: var(--navy); color: #fff; }
+  .variant .tag.v2 { background: #1d4ed8; color: #fff; }
+  .variant .tag.v3 { background: var(--gold); color: var(--ink); }
+  .variant .tag.new { background: var(--red); color: #fff; }
+  .variant h3 { margin: 4px 0 2px; font-size: 16px; font-weight: 700; }
+  .variant p { color: var(--muted); font-size: 12px; margin: 0; line-height: 1.5; }
+  .note { background: #fff8ed; border: 1px solid #f0e3a8; border-radius: 10px; padding: 16px; font-size: 13px; color: var(--navy); margin-bottom: 24px; line-height: 1.6; }
+  .note b { color: var(--red); }
+</style>
+</head>
+<body>
+
+<div class="scope-mock">
+  <span><b>SCOPE MOCK</b> — variants index</span>
+  <div class="crumbs">
+    <a href="./versions.html" class="current">All variants</a>
+    <a href="./index.html">Current landing</a>
+    <a href="./apps.html">Current apps</a>
+  </div>
+</div>
+
+<nav class="topnav">
+  <a href="./index.html" class="brand"><span class="mark">S</span> Cactus <small>by Sureshot</small></a>
+  <div class="links">
+    <a href="./index.html">Platform</a>
+    <a href="./rcs-api.html">Agent API</a>
+    <a href="./apps.html">Apps</a>
+    <a href="./console.html">Console</a>
+    <a href="./demo.html">Demo</a>
+    <a href="#">Docs</a>
+    <a href="#" class="cta-nav">Talk to Us</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <h1>Mockup variants</h1>
+  <p class="lead">Round 2 — comparing options for apps layout, entry-point framing, and a new console page.</p>
+
+  <div class="note">
+    <b>Rule of this round:</b> originals untouched. Everything new lives alongside the current pages. Nav was updated in variants to include <b>Console</b>, which is itself a new page built in this round.
+  </div>
+
+  <!-- New surface -->
+  <div class="group">
+    <h2>New surface · Console page</h2>
+    <p class="sub">"Go deep" page modeled on the existing Cactus /landing. Every core module bulleted out. Framed for agencies and marketers. Every module CTA follows the phone-capture → RCS-delivered pattern (paste a message, enter your phone, get the full result texted).</p>
+    <div class="variants">
+      <a class="variant" href="./console.html">
+        <span class="tag new">New</span>
+        <h3>console.html</h3>
+        <p>Deep modules: Risk · Send · Monitor · Register · Agent · Global + Extended (Numbers, Validate, Consent, Inbox, Insights, QA). Audience band for agencies / marketers / operators.</p>
+      </a>
+    </div>
+  </div>
+
+  <!-- Landing variants -->
+  <div class="group">
+    <h2>Landing page · 3 options</h2>
+    <p class="sub">Same hero, same pillars, same two-layer thesis. The difference is the "pick your entry point" section and the CTA framing.</p>
+    <div class="variants">
+      <a class="variant" href="./index.html">
+        <span class="tag current">Current</span>
+        <h3>index.html</h3>
+        <p>4-persona entry: Developer · Platform user · Anyone · Enterprise. Unchanged from last round — kept for comparison.</p>
+      </a>
+      <a class="variant" href="./index-v2.html">
+        <span class="tag v2">V2</span>
+        <h3>index-v2.html · 5 personas</h3>
+        <p>Adds <b>Product / no-code</b> and <b>Claude Code / MCP user</b> as first-class entry points. Risk + Layer 1 CTAs now phone-capture → RCS-delivered.</p>
+      </a>
+      <a class="variant" href="./index-v3.html">
+        <span class="tag v3">V3</span>
+        <h3>index-v3.html · surfaces axis</h3>
+        <p>Entry-point section promoted <b>above the fold</b> and organized by surface: Console · API · Apps · Demo. Personas become a thin chip strip. Pre-footer surface bar.</p>
+      </a>
+    </div>
+  </div>
+
+  <!-- Apps variants -->
+  <div class="group">
+    <h2>Apps page · 3 options</h2>
+    <p class="sub">Current page felt Eloqua-heavy. These reorganize around platform coverage and surface tiers to make the cross-platform story the headline.</p>
+    <div class="variants">
+      <a class="variant" href="./apps.html">
+        <span class="tag current">Current</span>
+        <h3>apps.html</h3>
+        <p>Two-layer split: Data quality (Layer 1) vs Messaging (Layer 2). Unchanged — kept for comparison.</p>
+      </a>
+      <a class="variant" href="./apps-v2.html">
+        <span class="tag v2">V2</span>
+        <h3>apps-v2.html · by platform</h3>
+        <p>Top band: platform-agnostic (APIs, MCP, Console). Then dedicated sections for <b>Oracle Eloqua · Iterable · HubSpot · Marketo · Your platform</b>. Roadmap visible.</p>
+      </a>
+      <a class="variant" href="./apps-v3.html">
+        <span class="tag v3">V3</span>
+        <h3>apps-v3.html · by surface tier</h3>
+        <p>Three tiers: <b>1. Standalone APIs</b> (build from scratch) → <b>2. Marketplace apps</b> (Eloqua, Iterable, etc.) → <b>3. Cactus Console</b> (built-in). Frames Eloqua as one of many.</p>
+      </a>
+    </div>
+  </div>
+
+  <div class="group">
+    <h2>Not changed in this round</h2>
+    <p class="sub">These stayed the same so the variants above can be compared cleanly. Next round we'll skin everything and wire up docs + blog.</p>
+    <div class="variants">
+      <a class="variant" href="./rcs-api.html">
+        <span class="tag current">Unchanged</span>
+        <h3>rcs-api.html</h3>
+        <p>Agent Delivery API pitch.</p>
+      </a>
+      <a class="variant" href="./demo.html">
+        <span class="tag current">Unchanged</span>
+        <h3>demo.html</h3>
+        <p>12-tile live RCS demo gallery.</p>
+      </a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

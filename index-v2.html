@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>V2 · Cactus by Sureshot — 5 personas + phone-capture CTAs</title>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+<style>
+  .hero { background: linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; padding: 72px 32px 60px; text-align: center; }
+  .hero .eyebrow { color: var(--gold); }
+  .hero h1 { font-size: 52px; line-height: 1.08; font-weight: 800; margin: 0 0 18px; max-width: 900px; margin-left: auto; margin-right: auto; }
+  .hero h1 em { color: var(--gold); font-style: normal; }
+  .hero .sub { font-size: 19px; opacity: 0.85; max-width: 680px; margin: 0 auto 28px; }
+  .hero .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .hero .manifesto-line { margin-top: 36px; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); opacity: 0.8; }
+  @media (max-width: 600px) { .hero h1 { font-size: 34px; } }
+  .lifecycle { padding: 40px 32px; background: #fff; border-bottom: 1px solid var(--line); }
+  .lifecycle h2 { text-align: center; font-size: 15px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin: 0 0 24px; }
+  .lifecycle .steps { display: flex; gap: 8px; justify-content: center; align-items: center; flex-wrap: wrap; max-width: 1100px; margin: 0 auto; }
+  .step { padding: 10px 14px; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; font-size: 13px; font-weight: 600; color: var(--navy); }
+  .step-arrow { color: var(--muted); }
+  .pillars { padding: 64px 32px; max-width: 1180px; margin: 0 auto; }
+  .pillars-head { text-align: center; margin-bottom: 40px; }
+  .pillars-head h2 { font-size: 36px; color: var(--navy); margin: 0 0 10px; font-weight: 800; }
+  .pillars-head p { color: var(--muted); font-size: 17px; max-width: 600px; margin: 0 auto; }
+  .pillar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 900px) { .pillar-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .pillar-grid { grid-template-columns: 1fr; } }
+  .pillar { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; display: flex; flex-direction: column; gap: 12px; transition: all 0.15s; }
+  .pillar:hover { border-color: var(--navy); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.04); }
+  .pillar .icon { width: 40px; height: 40px; background: var(--navy); color: var(--gold); border-radius: 10px; display: grid; place-items: center; font-weight: 800; font-size: 18px; }
+  .pillar h3 { margin: 0; font-size: 19px; color: var(--navy); font-weight: 700; }
+  .pillar p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.55; }
+  .pillar .pillar-links { display: flex; flex-direction: column; gap: 4px; margin-top: auto; padding-top: 10px; border-top: 1px solid var(--line); }
+  .pillar .pillar-links a { font-size: 13px; color: var(--navy); font-weight: 600; text-decoration: none; }
+  .pillar .pillar-links a:hover { color: var(--red); }
+  .pillar.capture-cta { border-color: var(--red); background: linear-gradient(180deg,#fff 0%,#fff8f8 100%); }
+  .pillar .capture-pill { display: inline-block; font-size: 9px; padding: 3px 8px; border-radius: 4px; background: var(--red); color: #fff; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-right: 6px; }
+  .pillar .capture-note { font-size: 11px; color: var(--muted); font-style: italic; margin-top: 4px; }
+  .cta-band { background: var(--navy); color: #fff; padding: 56px 32px; text-align: center; }
+  .cta-band h2 { font-size: 32px; margin: 0 0 10px; }
+  .cta-band p { color: #cfd3e1; font-size: 16px; margin: 0 0 28px; }
+  .cta-penta { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; max-width: 1200px; margin: 0 auto; }
+  @media (max-width: 1100px) { .cta-penta { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 780px) { .cta-penta { grid-template-columns: 1fr; } }
+  .cta-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius); padding: 22px; text-align: left; text-decoration: none; color: #fff; display: flex; flex-direction: column; gap: 8px; transition: all 0.15s; }
+  .cta-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+  .cta-card .label { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
+  .cta-card h3 { margin: 0; font-size: 18px; font-weight: 700; }
+  .cta-card p { color: #cfd3e1; font-size: 13px; margin: 0; line-height: 1.5; }
+  .cta-card .arrow { margin-top: auto; color: var(--gold); font-weight: 600; font-size: 14px; }
+  .logos { padding: 40px 32px; text-align: center; background: #fff; border-top: 1px solid var(--line); }
+  .logos .label { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; }
+  .logo-row { display: flex; justify-content: center; gap: 36px; flex-wrap: wrap; opacity: 0.6; font-weight: 700; font-size: 15px; color: var(--navy); }
+</style>
+</head>
+<body>
+
+<div class="scope-mock">
+  <span><b>VARIANT V2</b> — /landing with <b>5-persona entry points</b> + phone-capture CTA framing on Risk &amp; Layer 1</span>
+  <div class="crumbs">
+    <a href="./versions.html">← All variants</a>
+    <a href="./index.html">Current</a>
+    <a href="./index-v2.html" class="current">V2 · 5 personas</a>
+    <a href="./index-v3.html">V3 · surfaces axis</a>
+  </div>
+</div>
+
+<nav class="topnav">
+  <a href="./index.html" class="brand"><span class="mark">S</span> Cactus <small>by Sureshot</small></a>
+  <div class="links">
+    <a href="./index.html" class="active">Platform</a>
+    <a href="./rcs-api.html">Agent API</a>
+    <a href="./apps.html">Apps</a>
+    <a href="./console.html">Console</a>
+    <a href="./demo.html">Demo</a>
+    <a href="#">Docs</a>
+    <a href="#" class="cta-nav">Talk to Us</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="eyebrow">Cactus — The messaging platform</div>
+  <h1>The complete <em>messaging lifecycle</em></h1>
+  <p class="sub">Numbers. Validation. Consent. Registration. Risk. Send. Monitor. Inbox. Agent. Insights. All in one platform — built for the teams who need messaging to actually work.</p>
+  <div class="cta-row">
+    <a class="btn btn-primary btn-lg" href="./demo.html">▶ See it live on your phone</a>
+    <a class="btn btn-secondary btn-lg" style="color:#fff;border-color:#fff" href="#">Talk to Us</a>
+  </div>
+  <div class="manifesto-line">Clean data in. Personalized messages out.</div>
+</section>
+
+<div class="lifecycle">
+  <h2>End-to-end coverage</h2>
+  <div class="steps">
+    <span class="step">Numbers</span><span class="step-arrow">→</span>
+    <span class="step">Validation</span><span class="step-arrow">→</span>
+    <span class="step">Consent</span><span class="step-arrow">→</span>
+    <span class="step">Registration</span><span class="step-arrow">→</span>
+    <span class="step">Risk</span><span class="step-arrow">→</span>
+    <span class="step">Send</span><span class="step-arrow">→</span>
+    <span class="step">Monitor</span><span class="step-arrow">→</span>
+    <span class="step">Inbox</span><span class="step-arrow">→</span>
+    <span class="step">Agent</span><span class="step-arrow">→</span>
+    <span class="step">Insights</span>
+  </div>
+</div>
+
+<section class="pillars">
+  <div class="pillars-head">
+    <h2>Six pillars. One platform.</h2>
+    <p>Every module handles a piece of the lifecycle. Use them together, or start with the one that solves your next problem.</p>
+  </div>
+  <div class="pillar-grid">
+
+    <!-- Risk — now a phone-capture CTA -->
+    <div class="pillar capture-cta">
+      <div class="icon">R</div>
+      <h3>Risk</h3>
+      <p>Compliance intelligence. Pre-flight scanning for carrier-blocking content, TCPA violations, message hygiene.</p>
+      <div class="pillar-links">
+        <a href="#"><span class="capture-pill">Try free</span>▶ Scan a message, get the result texted</a>
+        <p class="capture-note">Paste a message, enter your phone — we send the full risk breakdown as an RCS card.</p>
+      </div>
+    </div>
+
+    <div class="pillar">
+      <div class="icon">S</div>
+      <h3>Send</h3>
+      <p>Rich message builder with automatic fallback across RCS, SMS, MMS, WhatsApp. Agent-first, marketer-first, or platform-embedded.</p>
+      <div class="pillar-links">
+        <a href="./rcs-api.html">Developers → Agent Delivery API</a>
+        <a href="./console.html">Marketers → Cactus Console</a>
+        <a href="./apps.html">Eloqua / Iterable → Platform Apps</a>
+      </div>
+    </div>
+
+    <div class="pillar">
+      <div class="icon">M</div>
+      <h3>Monitor</h3>
+      <p>Real delivery tracking — not just handoff status. See what actually reached the device, per carrier, in real time.</p>
+      <div class="pillar-links">
+        <a href="#"><span class="capture-pill">Try free</span>▶ Watch a live delivery timeline</a>
+        <p class="capture-note">We send you a test message, you see the full timeline on your phone and in the dashboard.</p>
+      </div>
+    </div>
+
+    <div class="pillar">
+      <div class="icon">R</div>
+      <h3>Register</h3>
+      <p>Campaign registration for 10DLC, RCS, and WhatsApp — automated where possible, guided where it can't be.</p>
+      <div class="pillar-links"><a href="#">Start registration →</a></div>
+    </div>
+
+    <div class="pillar">
+      <div class="icon">A</div>
+      <h3>Agent</h3>
+      <p>AI-powered inbound response. Handle replies, qualify leads, route conversations without a human on every thread.</p>
+      <div class="pillar-links">
+        <a href="#"><span class="capture-pill">Try free</span>▶ Text with our demo agent</a>
+        <p class="capture-note">Enter your phone, ask anything — see lead scoring and qualification live.</p>
+      </div>
+    </div>
+
+    <div class="pillar">
+      <div class="icon">G</div>
+      <h3>Global</h3>
+      <p>Country-specific compliance and international routing across 190+ countries. One API, every market.</p>
+      <div class="pillar-links"><a href="#">Learn more →</a></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Two-layer architecture — with phone-capture CTAs -->
+<section style="background:#fff;padding:64px 32px;border-top:1px solid var(--line);">
+  <div style="max-width:1180px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:40px;">
+      <div class="eyebrow">The Sureshot thesis</div>
+      <h2 style="font-size:36px;color:var(--navy);margin:0 0 10px;font-weight:800;">Clean data in. Personalized messages out.</h2>
+      <p style="color:var(--muted);font-size:17px;max-width:680px;margin:0 auto;">Two layers. Every product we ship serves one of them. Use just what you need — or stack them together for the full lifecycle.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+      <div style="background:linear-gradient(135deg,#f0f9ff 0%,#fff 100%);border:1px solid #c7e0f4;border-radius:14px;padding:28px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+          <div style="width:44px;height:44px;background:#1d4ed8;color:#fff;border-radius:10px;display:grid;place-items:center;font-weight:800;font-size:20px;">1</div>
+          <div>
+            <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#1d4ed8;font-weight:700;">Layer 1</div>
+            <h3 style="margin:0;font-size:22px;color:var(--navy);font-weight:800;">Clean data in</h3>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:14px;line-height:1.55;margin:0 0 16px;">Your channel isn't the problem — your data is. We validate, enrich, and verify upstream of any send. Proven to reduce dirty data by 98% (Adtalem).</p>
+        <div style="background:#eff6ff;border:1px dashed #1d4ed8;border-radius:10px;padding:14px;margin-bottom:14px;">
+          <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#1d4ed8;font-weight:800;margin-bottom:4px;">▶ Try it free</div>
+          <div style="font-weight:700;color:var(--navy);font-size:14px;margin-bottom:4px;">Send us a list. Get a waterfall sample back.</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.5;">Upload a list of emails. We'll run them through our multi-vendor waterfall and text you a sample report — which validators caught what, where the dirty data lives, what you'd save.</div>
+        </div>
+        <a href="./apps.html" style="display:inline-flex;color:#1d4ed8;font-weight:700;text-decoration:none;font-size:14px;">See all data-quality products →</a>
+      </div>
+
+      <div style="background:linear-gradient(135deg,#fff8f0 0%,#fff 100%);border:1px solid #f4c7a2;border-radius:14px;padding:28px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+          <div style="width:44px;height:44px;background:var(--red);color:#fff;border-radius:10px;display:grid;place-items:center;font-weight:800;font-size:20px;">2</div>
+          <div>
+            <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);font-weight:700;">Layer 2</div>
+            <h3 style="margin:0;font-size:22px;color:var(--navy);font-weight:800;">Personalized messages out</h3>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:14px;line-height:1.55;margin:0 0 16px;">Send the right message in the right format, through the system your team already uses. Agent-first, marketer-first, or platform-embedded.</p>
+        <div style="background:#fff4ed;border:1px dashed var(--red);border-radius:10px;padding:14px;margin-bottom:14px;">
+          <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);font-weight:800;margin-bottom:4px;">▶ Try it free</div>
+          <div style="font-weight:700;color:var(--navy);font-size:14px;margin-bottom:4px;">Send yourself a live RCS message.</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.5;">Pick a template from the gallery. Enter your phone. Watch a real RCS card land on your device — text, cards, carousels, interactive actions.</div>
+        </div>
+        <a href="./apps.html" style="display:inline-flex;color:var(--red);font-weight:700;text-decoration:none;font-size:14px;">See all messaging products →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- V2: 5-persona entry point -->
+<section class="cta-band">
+  <h2>Pick your entry point</h2>
+  <p>Five ways in. Same platform underneath.</p>
+  <div class="cta-penta">
+    <a class="cta-card" href="./rcs-api.html">
+      <div class="label">Developers</div>
+      <h3>Agent Delivery API</h3>
+      <p>One endpoint. Any format. Your agent's brains → customer's Messages app.</p>
+      <span class="arrow">Explore the API →</span>
+    </a>
+    <a class="cta-card" href="./console.html">
+      <div class="label">Marketers</div>
+      <h3>Cactus Console</h3>
+      <p>Full 6-pillar platform in a web workspace. For campaigns at scale.</p>
+      <span class="arrow">See the console →</span>
+    </a>
+    <a class="cta-card" href="./apps.html">
+      <div class="label">Product / No-code</div>
+      <h3>MCP + Low-code Apps</h3>
+      <p>Have an idea but don't code? Use our MCP server or Eloqua / Iterable apps to ship it.</p>
+      <span class="arrow">See the apps →</span>
+    </a>
+    <a class="cta-card" href="#">
+      <div class="label">Playing with Claude Code?</div>
+      <h3>MCP Server for Messaging</h3>
+      <p><code>@sure-shot/mcp-server-messaging</code> — drop into Claude Code or Cursor and send RCS from prompts.</p>
+      <span class="arrow">Install from npm →</span>
+    </a>
+    <a class="cta-card" href="#">
+      <div class="label">Enterprise</div>
+      <h3>Talk to Us</h3>
+      <p>15-minute walkthrough. Bring a campaign, leave with a plan. Russ runs it.</p>
+      <span class="arrow">Book a call →</span>
+    </a>
+  </div>
+</section>
+
+<div class="logos">
+  <div class="label">Trusted by</div>
+  <div class="logo-row">
+    <span>Dun &amp; Bradstreet</span><span>Cisco</span><span>JLL</span><span>Dell</span><span>Informa</span><span>PepsiCo</span>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="brand-col">
+    <div class="brand-line"><span style="width:32px;height:32px;background:var(--red);border-radius:7px;display:grid;place-items:center;font-weight:900;font-size:16px;">S</span> Cactus <small style="opacity:0.7;font-weight:400;">by Sureshot</small></div>
+    <p class="manifesto">Clean data in. Personalized messages out. The last mile — from your agent to their messages.</p>
+  </div>
+  <div><h4>Platform</h4><ul><li><a href="./index.html">Overview</a></li><li><a href="./rcs-api.html">Agent API</a></li><li><a href="./apps.html">Apps</a></li><li><a href="./console.html">Console</a></li><li><a href="./demo.html">Live Demo</a></li></ul></div>
+  <div><h4>Developers</h4><ul><li><a href="#">API Docs</a></li><li><a href="#">MCP Server</a></li><li><a href="#">Changelog</a></li><li><a href="#">Status</a></li></ul></div>
+  <div><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul></div>
+  <div class="copyright">© Sure Shot Labs · Delaware LLC</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>V2 · Apps — organized by platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+<style>
+  .hero { background: linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; padding: 64px 32px 52px; text-align: center; }
+  .hero .eyebrow { color: var(--gold); }
+  .hero h1 { font-size: 46px; line-height: 1.1; font-weight: 800; margin: 0 0 14px; max-width: 860px; margin-left: auto; margin-right: auto; }
+  .hero h1 em { color: var(--gold); font-style: normal; }
+  .hero .sub { font-size: 18px; opacity: 0.88; max-width: 700px; margin: 0 auto 22px; }
+  .hero .manifesto-line { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); opacity: 0.85; margin-top: 22px; }
+  @media (max-width: 600px) { .hero h1 { font-size: 32px; } }
+
+  /* Cross-platform top band — the APIs and MCP sit above all platforms */
+  .cross-band { padding: 48px 32px; background: #fff; border-bottom: 1px solid var(--line); }
+  .cross-band-inner { max-width: 1180px; margin: 0 auto; }
+  .cross-head { text-align: center; margin-bottom: 28px; }
+  .cross-head .eyebrow { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); font-weight: 800; }
+  .cross-head h2 { font-size: 28px; color: var(--navy); margin: 4px 0 8px; font-weight: 800; }
+  .cross-head p { color: var(--muted); font-size: 15px; margin: 0; max-width: 640px; margin-left: auto; margin-right: auto; }
+  .cross-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 900px) { .cross-grid { grid-template-columns: 1fr; } }
+
+  /* Platform sections */
+  .platform { padding: 56px 32px; border-top: 1px solid var(--line); }
+  .platform:nth-child(even) { background: var(--bg); }
+  .platform-inner { max-width: 1180px; margin: 0 auto; }
+  .platform-head { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+  .platform-logo { width: 54px; height: 54px; border-radius: 12px; display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 22px; flex-shrink: 0; }
+  .platform-logo.eloqua { background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); }
+  .platform-logo.iterable { background: linear-gradient(135deg, #6b21a8 0%, #581c87 100%); }
+  .platform-logo.hubspot { background: linear-gradient(135deg, #f97316 0%, #c2410c 100%); }
+  .platform-logo.marketo { background: linear-gradient(135deg, #6b21a8 0%, #312e81 100%); }
+  .platform-logo.braze { background: linear-gradient(135deg, #0891b2 0%, #164e63 100%); }
+  .platform-logo.your { background: linear-gradient(135deg, var(--muted) 0%, var(--navy) 100%); }
+  .platform-head h2 { margin: 0; font-size: 28px; color: var(--navy); font-weight: 800; }
+  .platform-head .meta { color: var(--muted); font-size: 14px; margin-top: 2px; }
+  .platform-head .badge { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 800; padding: 4px 10px; border-radius: 4px; margin-left: auto; }
+  .platform-head .badge.live { background: #dcfce7; color: #166534; }
+  .platform-head .badge.build { background: #fef3c7; color: #a16207; }
+  .platform-head .badge.road { background: #e5e7eb; color: var(--muted); }
+
+  .app-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 900px) { .app-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .app-grid { grid-template-columns: 1fr; } }
+  .app-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; display: flex; flex-direction: column; gap: 8px; }
+  .app-card.flagship { border: 2px solid var(--gold); background: linear-gradient(180deg, #fff 0%, #fffbed 100%); position: relative; }
+  .app-card.flagship::before { content: "Flagship"; position: absolute; top: -10px; right: 16px; background: var(--gold); color: var(--ink); font-size: 10px; padding: 3px 10px; border-radius: 4px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 800; }
+  .app-card h3 { margin: 0; font-size: 16px; color: var(--navy); font-weight: 700; }
+  .app-card .type { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+  .app-card p { color: var(--muted); font-size: 13px; line-height: 1.5; margin: 0; }
+  .app-card a { font-size: 12px; color: var(--navy); font-weight: 700; text-decoration: none; margin-top: auto; padding-top: 8px; border-top: 1px solid var(--line); }
+  .app-card a:hover { color: var(--red); }
+
+  .platform-empty { background: #fff; border: 1px dashed var(--line); border-radius: var(--radius); padding: 28px; text-align: center; color: var(--muted); font-size: 14px; }
+  .platform-empty b { color: var(--navy); }
+
+  .bridge { padding: 48px 32px; background: #fff8ed; border-top: 1px solid #f0e3a8; border-bottom: 1px solid #f0e3a8; }
+  .bridge-wrap { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: center; }
+  @media (max-width: 700px) { .bridge-wrap { grid-template-columns: 1fr; } }
+  .bridge-icon { width: 72px; height: 72px; background: var(--gold); color: var(--ink); border-radius: 16px; display: grid; place-items: center; font-weight: 900; font-size: 28px; flex-shrink: 0; }
+  .bridge h3 { margin: 0 0 6px; font-size: 20px; color: var(--navy); }
+  .bridge p { margin: 0; color: var(--navy); font-size: 15px; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<div class="scope-mock">
+  <span><b>VARIANT V2</b> — /apps organized by <b>platform</b> (Eloqua, Iterable, HubSpot, Marketo, etc.)</span>
+  <div class="crumbs">
+    <a href="./versions.html">← All variants</a>
+    <a href="./apps.html">Current</a>
+    <a href="./apps-v2.html" class="current">V2 · by platform</a>
+    <a href="./apps-v3.html">V3 · by surface tier</a>
+  </div>
+</div>
+
+<nav class="topnav">
+  <a href="./index.html" class="brand"><span class="mark">S</span> Cactus <small>by Sureshot</small></a>
+  <div class="links">
+    <a href="./index.html">Platform</a>
+    <a href="./rcs-api.html">Agent API</a>
+    <a href="./apps.html" class="active">Apps</a>
+    <a href="./console.html">Console</a>
+    <a href="./demo.html">Demo</a>
+    <a href="#">Docs</a>
+    <a href="#" class="cta-nav">Talk to Us</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="eyebrow">Sureshot apps</div>
+  <h1>Meet your team <em>where they already work</em></h1>
+  <p class="sub">Drop-in apps for the marketing platforms your team already runs. Or standalone APIs if you want to build from scratch. Same engine underneath.</p>
+  <div class="manifesto-line">Clean data in. Personalized messages out.</div>
+</section>
+
+<!-- Cross-platform: the engine you can plug into anything -->
+<section class="cross-band">
+  <div class="cross-band-inner">
+    <div class="cross-head">
+      <div class="eyebrow">Platform-agnostic</div>
+      <h2>The engine you can plug into anything</h2>
+      <p>APIs, the MCP server, and the Cactus Console itself. Works regardless of whether you're on Eloqua, Iterable, or building from scratch.</p>
+    </div>
+    <div class="cross-grid">
+      <div class="app-card flagship">
+        <div class="type">Standalone API</div>
+        <h3>Waterfall Email Validation API</h3>
+        <p>Multi-vendor waterfall — cascade through best-in-class validators. 98% dirty-data reduction (Adtalem).</p>
+        <a href="#">View docs →</a>
+      </div>
+      <div class="app-card flagship">
+        <div class="type">Standalone API</div>
+        <h3>Agent Delivery API (RCS)</h3>
+        <p>One endpoint, any format. Raw text or structured items, we render the right RCS card.</p>
+        <a href="./rcs-api.html">Product page →</a>
+      </div>
+      <div class="app-card">
+        <div class="type">MCP package · npm</div>
+        <h3>MCP Server for Messaging</h3>
+        <p><code>@sure-shot/mcp-server-messaging</code> — drop into Claude Code, Cursor, any MCP client to send RCS.</p>
+        <a href="#">npm →</a>
+      </div>
+      <div class="app-card">
+        <div class="type">Web app</div>
+        <h3>Cactus Console</h3>
+        <p>Full 6-pillar platform in a workspace. Campaigns, registration, inbox, analytics.</p>
+        <a href="./console.html">See console →</a>
+      </div>
+      <div class="app-card">
+        <div class="type">Phone validation</div>
+        <h3>Phone Validation API</h3>
+        <p>Line type, carrier lookup, SMS/WhatsApp capable. 100 free/month built in.</p>
+        <a href="#">View docs →</a>
+      </div>
+      <div class="app-card">
+        <div class="type">Risk scanning</div>
+        <h3>Risk API (free tier)</h3>
+        <p>Score messages for carrier blocks, TCPA gaps, opt-out language. Standalone REST.</p>
+        <a href="#">View docs →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Oracle Eloqua -->
+<section class="platform">
+  <div class="platform-inner">
+    <div class="platform-head">
+      <div class="platform-logo eloqua">E</div>
+      <div>
+        <h2>Oracle Eloqua</h2>
+        <div class="meta">Marketplace apps · production · decade of deployments</div>
+      </div>
+      <span class="badge live">Live</span>
+    </div>
+    <div class="app-grid">
+      <div class="app-card">
+        <div class="type">Marketplace app</div>
+        <h3>Email Validation for Eloqua</h3>
+        <p>Drag-and-drop into any campaign canvas. Validates inline, flags risky addresses, quarantines junk.</p>
+        <a href="#">Learn more →</a>
+      </div>
+      <div class="app-card">
+        <div class="type">Marketplace app</div>
+        <h3>Phone Validation for Eloqua</h3>
+        <p>Normalize, validate, enrich phone numbers in your Eloqua contacts.</p>
+        <a href="#">Learn more →</a>
+      </div>
+      <div class="app-card">
+        <div class="type">Marketplace app</div>
+        <h3>Twilio SMS for Eloqua</h3>
+        <p>The OG. Send SMS from Eloqua campaign canvases — Twilio under the hood, Sureshot-managed.</p>
+        <a href="#">Learn more →</a>
+      </div>
+      <div class="app-card">
+        <div class="type">Marketplace app · coming</div>
+        <h3>RCS for Eloqua</h3>
+        <p>Rich RCS messages from campaign canvases. Auto-fallback to SMS. In build.</p>
+        <a href="#">Join the waitlist →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Iterable -->
+<section class="platform">
+  <div class="platform-inner">
+    <div class="platform-head">
+      <div class="platform-logo iterable">I</div>
+      <div>
+        <h2>Iterable</h2>
+        <div class="meta">Marketplace app · in build</div>
+      </div>
+      <span class="badge build">In build</span>
+    </div>
+    <div class="app-grid">
+      <div class="app-card">
+        <div class="type">Marketplace app · in build</div>
+        <h3>Iterable Messaging App</h3>
+        <p>Send RCS, SMS, and MMS from within Iterable journeys. Same platform-managed delivery, same data-quality layer.</p>
+        <a href="#">Join the waitlist →</a>
+      </div>
+      <div class="platform-empty">
+        <b>Need something specific on Iterable?</b><br>Tell us what your team uses it for and we'll prioritize against the roadmap.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HubSpot -->
+<section class="platform">
+  <div class="platform-inner">
+    <div class="platform-head">
+      <div class="platform-logo hubspot">H</div>
+      <div>
+        <h2>HubSpot</h2>
+        <div class="meta">On the roadmap · vote with your use case</div>
+      </div>
+      <span class="badge road">Roadmap</span>
+    </div>
+    <div class="platform-empty">
+      <b>Coming — HubSpot marketplace apps.</b><br>Email &amp; phone validation, SMS, and RCS are all candidates. If your team's on HubSpot, tell us what you need first.<br>
+      <a href="#" style="display:inline-block;margin-top:10px;color:var(--red);font-weight:700;text-decoration:none;">Tell us what you need →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Marketo -->
+<section class="platform">
+  <div class="platform-inner">
+    <div class="platform-head">
+      <div class="platform-logo marketo">M</div>
+      <div>
+        <h2>Marketo</h2>
+        <div class="meta">On the roadmap</div>
+      </div>
+      <span class="badge road">Roadmap</span>
+    </div>
+    <div class="platform-empty">
+      <b>Coming — Marketo marketplace apps.</b><br>We already integrate with Eloqua and Iterable. Marketo is next on the list if customer demand leads us there.<br>
+      <a href="#" style="display:inline-block;margin-top:10px;color:var(--red);font-weight:700;text-decoration:none;">Request Marketo integration →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Your platform -->
+<section class="platform">
+  <div class="platform-inner">
+    <div class="platform-head">
+      <div class="platform-logo your">?</div>
+      <div>
+        <h2>Your platform next?</h2>
+        <div class="meta">Braze · Klaviyo · Salesforce Marketing Cloud · something else</div>
+      </div>
+    </div>
+    <div class="platform-empty">
+      We build platform-embedded apps where our customers already live. If your team uses something that should have a Sureshot app, tell us.<br>
+      <a href="#" style="display:inline-block;margin-top:10px;color:var(--red);font-weight:700;text-decoration:none;">Request an integration →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Bridge -->
+<div class="bridge">
+  <div class="bridge-wrap">
+    <div class="bridge-icon">→</div>
+    <div>
+      <h3>One engine. Many front doors.</h3>
+      <p>Every app on this page runs on the same Cactus platform. Whether your team works in Eloqua, Iterable, a developer IDE with Claude Code, or a web console — the data quality and delivery work the same way underneath.</p>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="brand-col">
+    <div class="brand-line"><span style="width:32px;height:32px;background:var(--red);border-radius:7px;display:grid;place-items:center;font-weight:900;font-size:16px;">S</span> Cactus <small style="opacity:0.7;font-weight:400;">by Sureshot</small></div>
+    <p class="manifesto">Clean data in. Personalized messages out. The last mile — from your agent to their messages.</p>
+  </div>
+  <div><h4>Platform</h4><ul><li><a href="./index.html">Overview</a></li><li><a href="./rcs-api.html">Agent API</a></li><li><a href="./apps.html">Apps</a></li><li><a href="./console.html">Console</a></li><li><a href="./demo.html">Live Demo</a></li></ul></div>
+  <div><h4>Developers</h4><ul><li><a href="#">API Docs</a></li><li><a href="#">MCP Server</a></li><li><a href="#">Changelog</a></li><li><a href="#">Status</a></li></ul></div>
+  <div><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul></div>
+  <div class="copyright">© Sure Shot Labs · Delaware LLC</div>
+</footer>
+
+</body>
+</html>
